@@ -1,0 +1,13 @@
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (1,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (2,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (3,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (4,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (5,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (6,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (7,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (8,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (9,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (10,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (11,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (12,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);
+INSERT INTO `club`.`court_status` (court_no,court_status_list_id,valid_from,valid_to,changed_by) VALUES (13,1,'2019-01-01 00:00:00','9999-12-31 23:59:59',1);

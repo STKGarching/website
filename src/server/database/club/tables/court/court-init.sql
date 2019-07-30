@@ -1,0 +1,17 @@
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (1,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (2,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (3,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (4,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (5,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (6,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (7,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (8,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (9,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (10,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (11,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (12,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (13,'Sand','Freiplatz','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (1,'Teppich','Halle','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (2,'Teppich','Halle','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (3,'Teppich','Halle','2019-01-01','9999-12-31');
+INSERT INTO `club`.`court` (court_no,court_surface,court_type,valid_from,valid_to) VALUES (4,'Teppich','Halle','2019-01-01','9999-12-31');
