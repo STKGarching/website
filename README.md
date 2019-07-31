@@ -39,3 +39,23 @@ schema related folder with subfolders:
 * **tables**: containing all scripts for table creation and consecutive procedures
 * **functions**: containing all scripts for function creation
 * **queries**: all queries for REST API
+
+### ERR Model
+**diagram**
+```diff
+- diagramm does not fit 100% correctly to DDL scripts. Will be corrected soon!
+```
+![Diagram](https://github.com/STKGarching/website/blob/master/STK_ERR.png)
+
+**explanation**
+This is a first short explanation. Not finished yet:  
+
+**sport**  
+__benefits__ are can be anything which gives (in generall monetary) advantages for players and teams. A normal benefit like a trainer for a team has the following setup: _is_claimable_ is false, _cap_sum_value_ is null, _value_ is not null.  
+There are benefits with and upper monetary limit: This means _is_claimable_ is true, _cap_sum_value_ is not null, _value_ is null
+Those benefits must be claimed (see the table __claim__) which means the player must bring a bill and then gets the refund, e.g. tournament fee.  
+There are benefits where the player or team has to contribute (sse table __contribution__) a small monetary amount.
+
+**club**
+The court status can be monitored. First application is the status due to weather conditions. Upcoming features are possible but will not implemented in first stage.  
+"Arbeitsdienst" should be organised by a task list (similar to JIRA)
