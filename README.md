@@ -34,7 +34,7 @@ install.sh 2
 **src/server/**
 Installation file and project files
 
-**src/server/club and src/server/sport**
+**src/server/database/club and src/server/database/sport**
 schema related folder with subfolders:
 * **tables**: containing all scripts for table creation and consecutive procedures
 * **functions**: containing all scripts for function creation
