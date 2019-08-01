@@ -35,9 +35,11 @@ FROM
     LEFT JOIN sport.team t ON b.entity_id = t.team_id
     LEFT JOIN sport.team_members tm ON t.team_id = tm.team_id
     LEFT JOIN (SELECT
-        team_id, COUNT(*) AS cnt_team_members
+        tm.team_id, COUNT(*) AS cnt_team_members
     FROM
-        sport.team_members
+        sport.team_members tm
+    WHERE
+        1 = 1 AND tm_is_main_team = TRUE
     GROUP BY team_id) tm_count ON tm.team_id = tm_count.team_id
     LEFT JOIN sport.player p ON tm.player_id = p.player_id
     LEFT JOIN club.person pers ON p.member_no = pers.member_no
