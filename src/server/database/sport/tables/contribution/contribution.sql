@@ -1,5 +1,7 @@
 -- -----------------------------------------------------
 -- Table `sport`.`contribution`
+-- all extra payments from members to the club. Regular payments are membership fees, etc.
+-- Extra payments can be a financial participation for courts, trainer, balls, etc. but also donations
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `sport`.`contribution` ;
 
