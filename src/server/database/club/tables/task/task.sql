@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `club`.`task` (
 	`task_no` INT NOT NULL,
 	`title` VARCHAR(256) NOT NULL,
 	`description` BLOB,
-	`priority_id` INT NOT NULL,
+	`task_priority_id` INT NOT NULL,
 	`created_at` DATE NOT NULL,
 	`modified_at` DATE NOT NULL,
 	`due_date` DATE,
