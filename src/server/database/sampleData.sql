@@ -23,8 +23,8 @@ INSERT INTO `club`.`image` (name,url,created_at,modified_at) VALUES ('Profilbild
 INSERT INTO `club`.`image` (name,url,created_at,modified_at) VALUES ('Profilbild Daniel Düsentrieb','https://www.stk-garching.de/daniel','2019-04-01 00:00:00','2019-04-01 00:00:00');
 
 -- Task (ein offener Task und ein erstellter Task)
-INSERT INTO `club`.`task` (task_no,title,description,priority_id,created_at,modified_at,due_date,task_status_id,resolution_date) VALUES (1,'Sprenkler wechseln','Defekten Sprenkler auf Platz 13 wechseln',2,'2019-06-01 10:47:13','2019-06-01 10:47:13',NULL,1,NULL);
-INSERT INTO `club`.`task` (task_no,title,description,priority_id,created_at,modified_at,due_date,task_status_id,resolution_date) VALUES (2,'Hecke schneiden','Hecke zwischen Platz 3 und Platz 4 schneiden.',3,'2019-06-12 15:15:58','2019-06-12 15:35:47',NULL,2,NULL);
+INSERT INTO `club`.`task` (task_no,title,description,task_priority_id,created_at,modified_at,due_date,task_status_id,resolution_date) VALUES (1,'Sprenkler wechseln','Defekten Sprenkler auf Platz 13 wechseln',2,'2019-06-01 10:47:13','2019-06-01 10:47:13',NULL,1,NULL);
+INSERT INTO `club`.`task` (task_no,title,description,task_priority_id,created_at,modified_at,due_date,task_status_id,resolution_date) VALUES (2,'Hecke schneiden','Hecke zwischen Platz 3 und Platz 4 schneiden.',3,'2019-06-12 15:15:58','2019-06-12 15:35:47',NULL,2,NULL);
 
 -- Task 1
 -- Ersteller
