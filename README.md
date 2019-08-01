@@ -3,6 +3,10 @@
 Follow these instructions to get the website running on your dev system:
 1. Set up database. [See this section](#Database) for detailed installation hints.
 
+# Frontend
+## Prototyp
+You can find a prototyp [here](https://marvelapp.com/55c77je). Prototype shows functionality of the Progressive Web App.
+
 # Backend
 ## Database
 ### Installation
