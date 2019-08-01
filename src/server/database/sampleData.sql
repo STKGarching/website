@@ -12,6 +12,7 @@ INSERT INTO `club`.`person` (person_no,is_member,member_no,first_name,last_name)
 INSERT INTO `club`.`person` (person_no,is_member,member_no,first_name,last_name) VALUES (7,TRUE,7,'Sabine','Saubermann');
 INSERT INTO `club`.`person` (person_no,is_member,member_no,first_name,last_name) VALUES (8,TRUE,8,'Maria','Mustermann');
 INSERT INTO `club`.`person` (person_no,is_member,member_no,first_name,last_name) VALUES (9,FALSE,NULL,'Peter','Platzwart');
+INSERT INTO `club`.`person` (person_no,is_member,member_no,first_name,last_name) VALUES (10,TRUE,10,'Martin','Mannschaftslos');
 
 -- Image
 -- Image von Paul Panzer
@@ -70,21 +71,24 @@ INSERT INTO `sport`.`player` (member_no) VALUES (5);
 INSERT INTO `sport`.`player` (member_no) VALUES (6);
 INSERT INTO `sport`.`player` (member_no) VALUES (7);
 INSERT INTO `sport`.`player` (member_no) VALUES (8);
+INSERT INTO `sport`.`player` (member_no) VALUES (10);
 
 -- Teams
 INSERT INTO `sport`.`team` (team_name,season,valid_from,valid_to) VALUES ('Herren','Sommerrunde 2019','2019-04-01 00:00:00','2019-09-30 23:59:59');
+INSERT INTO `sport`.`team` (team_name,season,valid_from,valid_to) VALUES ('Herren 2','Sommerrunde 2019','2019-04-01 00:00:00','2019-09-30 23:59:59');
 INSERT INTO `sport`.`team` (team_name,season,valid_from,valid_to) VALUES ('Damen','Sommerrunde 2019','2019-04-01 00:00:00','2019-09-30 23:59:59');
 
 -- Team Members
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,1);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,2);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,3);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,4);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (2,5);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (2,6);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (2,7);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (2,8);
-
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,1,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,2,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,3,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,4,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (3,5,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (3,6,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (3,7,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (3,8,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (2,9,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,9,false);
 -- Benefit
 INSERT INTO `sport`.`benefit` (benefit_type_id,entity_id,entity,description,valid_from,valid_to,count,amount_id,value,cap_sum_value,is_claimable) VALUES (2,1,'team','Hallentraining Herren am Samstag','2018-09-25 00:00:00','2019-04-20 23:59:59',50,1,22,NULL,false);
 INSERT INTO `sport`.`benefit` (benefit_type_id,entity_id,entity,description,valid_from,valid_to,count,amount_id,value,cap_sum_value,is_claimable) VALUES (3,2,'team','Trainer im Sommer für Damen','2019-04-15 00:00:00','2019-09-30 23:59:59',15,1,46,NULL,false);
