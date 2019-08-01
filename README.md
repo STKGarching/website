@@ -42,9 +42,6 @@ schema related folder with subfolders:
 
 ### ERR Model
 **diagram**
-```diff
-- diagramm does not fit 100% correctly to DDL scripts. Will be corrected soon!
-```
 ![Diagram](https://github.com/STKGarching/website/blob/master/STK_ERR.png)
 
 **explanation**
