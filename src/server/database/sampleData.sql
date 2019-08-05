@@ -79,16 +79,16 @@ INSERT INTO `sport`.`team` (team_name,season,valid_from,valid_to) VALUES ('Herre
 INSERT INTO `sport`.`team` (team_name,season,valid_from,valid_to) VALUES ('Damen','Sommerrunde 2019','2019-04-01 00:00:00','2019-09-30 23:59:59');
 
 -- Team Members
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,1,true);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,2,true);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,3,true);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,4,true);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (3,5,true);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (3,6,true);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (3,7,true);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (3,8,true);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (2,9,true);
-INSERT INTO `sport`.`team_members` (team_id,player_id) VALUES (1,9,false);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (1,1,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (1,2,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (1,3,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (1,4,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (3,5,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (3,6,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (3,7,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (3,8,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (2,9,true);
+INSERT INTO `sport`.`team_members` (team_id,player_id,is_main_team) VALUES (1,9,false);
 -- Benefit
 INSERT INTO `sport`.`benefit` (benefit_type_id,entity_id,entity,description,valid_from,valid_to,count,amount_id,value,cap_sum_value,is_claimable) VALUES (2,1,'team','Hallentraining Herren am Samstag','2018-09-25 00:00:00','2019-04-20 23:59:59',50,1,22,NULL,false);
 INSERT INTO `sport`.`benefit` (benefit_type_id,entity_id,entity,description,valid_from,valid_to,count,amount_id,value,cap_sum_value,is_claimable) VALUES (3,2,'team','Trainer im Sommer für Damen','2019-04-15 00:00:00','2019-09-30 23:59:59',15,1,46,NULL,false);
