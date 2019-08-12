@@ -14,5 +14,9 @@ Beschreibung: Eine Liste aller Task.
 
 `http://127.0.0.1:5000/all_tasks`
 
+## 3. task_details
+Beschreibung: Bei der Auswahl eines Task können zu diesem Detail Informationen  geladen werden.
+
+`http://127.0.0.1:5000/task_detail?task_no=5`
 
 

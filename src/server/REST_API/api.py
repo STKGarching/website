@@ -52,6 +52,28 @@ FROM
     club.task_status ts ON t.task_status_id = ts.task_status_id;
 """
 
+QUERY_SELECT_TASK_DETAIL = """
+SELECT
+    rt.relationship_type,
+    -- Für einen Link zum Profil
+    p.person_no,
+    p.first_name,
+    p.last_name
+FROM
+    club.task t
+        LEFT JOIN
+    club.relationship r ON t.task_id = r.source_id
+        LEFT JOIN
+    club.person p ON r.target_id = p.person_id
+        LEFT JOIN
+    club.relationship_type rt ON r.relationship_type_id = rt.relationship_type_id
+WHERE
+    1 = 1 AND r.source = 'task'
+        AND r.target = 'person'
+        AND t.task_no = {0};
+"""
+
+
 class HelloWorld(Resource):
     def get(self):
         parser = reqparse.RequestParser()
@@ -93,10 +115,22 @@ class all_tasks(Resource):
         items = [dict(zip(column, row)) for row in all_tasks]
         return items
 
+class task_detail(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('task_no', required=True, help="task_no cannot be blank!")
+        args = parser.parse_args()        
+        sql_task_detail = QUERY_SELECT_TASK_DETAIL.format(args['task_no'])
+        task_detail = _fetch_data_in_database(sql_task_detail)
+        column = ['relationship_type', 'person_no', 'first_name', 'last_name']
+        items = [dict(zip(column, row)) for row in task_detail]
+        return items        
+
 api.add_resource(HelloWorld, '/')
 api.add_resource(Benefit, '/benefit')
 api.add_resource(court_status, '/court_status')
 api.add_resource(all_tasks, '/all_tasks')
+api.add_resource(task_detail, '/task_detail')
 
 
 def _fetch_data_in_database(sql):    
