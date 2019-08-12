@@ -39,10 +39,10 @@ FROM
     FROM
         sport.team_members tm
     WHERE
-        1 = 1 AND tm_is_main_team = TRUE
+        1 = 1 AND tm.is_main_team = TRUE
     GROUP BY team_id) tm_count ON tm.team_id = tm_count.team_id
     LEFT JOIN sport.player p ON tm.player_id = p.player_id
-    LEFT JOIN club.person pers ON p.member_no = pers.member_no
+    LEFT JOIN club.person pers ON p.member_no = p.member_no
     WHERE
         1 = 1 AND entity = 'team'
             AND p.member_no = @var_member_no
@@ -73,7 +73,7 @@ FROM
         1 = 1 AND c.created_at >= @var_from
             AND c.created_at < @var_to
     GROUP BY c.benefit_id) c ON c.benefit_id = b.benefit_id
-    LEFT JOIN club.person pers ON p.member_no = pers.member_no
+    LEFT JOIN club.person pers ON p.member_no = p.member_no
     WHERE
         1 = 1 AND entity = 'player'
             AND p.member_no = @var_member_no
