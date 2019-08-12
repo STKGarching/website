@@ -20,3 +20,7 @@ Beschreibung: Bei der Auswahl eines Task können zu diesem Detail Informationen 
 `http://127.0.0.1:5000/task_detail?task_no=5`
 
 
+## 4. benefit
+Beschreibung: Jedes eingeloggte Mitglied kann seine Benefits sehen. Dazu muss das Mitglied eingeloggt sein. 
+
+`http://127.0.0.1:5000/benefit?members_no=1&valid_from='2019-01-01 00:00:00'&valid_to='2020-01-01 00:00:00'`
