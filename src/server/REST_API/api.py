@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask_restful import Resource, Api
 from flask_restful import reqparse
+from flask_swagger_ui import get_swaggerui_blueprint
 from flaskext.mysql import MySQL
 import json
 
@@ -11,6 +12,20 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'pass'
 app.config['MYSQL_DATABASE_DB'] = 'sport'
+
+### swagger specific ###
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "STK Garching API"
+    }
+)
+app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+### end swagger specific ###
+
 
 mysql = MySQL(app)
 QUERY_SELECT_COURT_STATUS = """
@@ -155,10 +170,7 @@ FROM
 
 class HelloWorld(Resource):
     def get(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument('team_members_id', required=True, help="team_members_id cannot be blank!")
-        args = parser.parse_args() 
-        return args['team_members_id']
+        return "Welcome to STK Garching API"
 
 class benefit(Resource):
     def get(self):
