@@ -170,7 +170,15 @@ FROM
 
 class HelloWorld(Resource):
     def get(self):
-        return "Welcome to STK Garching API"
+        return """
+          <html>
+            <head>
+              Welcome to STK Garching API.
+            </head> 
+            <body>
+              For more information check this link:{0}/swagger
+            </body></html>"
+        """.format(request.url)  
 
 class benefit(Resource):
     def get(self):
