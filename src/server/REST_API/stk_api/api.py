@@ -9,8 +9,8 @@ import json
 app = Flask(__name__)
 api = Api(app)
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'pass'
+app.config['MYSQL_DATABASE_USER'] = 'admin'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'steam96'
 app.config['MYSQL_DATABASE_DB'] = 'sport'
 
 ### swagger specific ###
