@@ -7,8 +7,8 @@ import Info from "./info";
 import Calendar from "./calendar";
 import Download from "./download";
 import Contact from "./contact";
-import Settings from "../container/Profile/settings";
-import Admin from "../container/Profile/admin";
+import Settings from "../container/Settings/settings";
+import Admin from "../container/Admin/admin";
 import Callback from "./callback";
 import { PrivateRoute } from "./extensions/privateRoute";
 //<Route exact path='/' component={Home}/>
@@ -20,7 +20,7 @@ export class Main extends Component {
         <Switch>
           {" "}
           <Route exact path="/" component={Home} />{" "}
-          <PrivateRoute exact path="/profile" component={Profile} />{" "}
+          <PrivateRoute path="/profile" component={Profile} />{" "}
           <Route exact path="/info" component={Info} />{" "}
           <Route exact path="/calendar" component={Calendar} />{" "}
           <Route exact path="/download" component={Download} />{" "}

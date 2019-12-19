@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 export class ProfileNewsView extends Component {
+  componentDidMount() {
+
+  }
   render() {
     return (
       <div>

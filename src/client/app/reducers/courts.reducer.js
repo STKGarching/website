@@ -17,7 +17,7 @@ export function courtsReducer(state = Map(), action) {
   switch (action.type) {
     case courtsConstants.SET_STATE_COURTS_STATUS:
       return setState(state, action.state);
-    case courtsConstants.GET_COURTS_STATUS_SUCCESS:
+    case courtsConstants.GET_COURTS_STATUS_FULFILLED:
       return getCourtsStatus(state, action.payload);
     default:
       return state;

@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import AdminView from "./admin.view";
 
 const mapStateToProps = state => {
-  return { authentication: state.testReducer.get("authentication") };
+  return { authentication: state.authenticationReducer.get("isAuthenticated") };
 };
 
-const mapDispatchToProps = dispatch => {};
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
 export default connect(
   mapStateToProps,

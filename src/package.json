@@ -61,8 +61,11 @@
     "history": "^4.7.2",
     "immutable": "^3.8.2",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
     "morgan": "^1.9.0",
     "node-mysql": "^0.4.2",
+    "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.5.2",
@@ -72,9 +75,6 @@
     "redux": "^3.7.2",
     "redux-promise": "^0.5.3",
     "redux-promise-middleware": "^5.0.0",
-    "redux-thunk": "^2.2.0",
-    "lodash": "^4.17.11",
-    "moment": "^2.22.2",
-    "prop-types": "^15.6.2"
+    "redux-thunk": "^2.2.0"
   }
 }

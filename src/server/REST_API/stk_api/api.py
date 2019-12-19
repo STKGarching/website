@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask_cors import CORS
 from flask_restful import Resource, Api
 from flask_restful import reqparse
 from flask_swagger_ui import get_swaggerui_blueprint
@@ -7,6 +8,7 @@ from flaskext.mysql import MySQL
 import json
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['MYSQL_DATABASE_USER'] = 'admin'
@@ -174,11 +176,11 @@ class HelloWorld(Resource):
           <html>
             <head>
               Welcome to STK Garching API.
-            </head> 
+            </head>
             <body>
               For more information check this link:{0}/swagger
             </body></html>"
-        """.format(request.url)  
+        """.format(request.url)
 
 class benefit(Resource):
     def get(self):
@@ -186,18 +188,18 @@ class benefit(Resource):
         parser.add_argument('members_no', required=True, help="members_no cannot be blank!")
         parser.add_argument('valid_from', required=True, help="valid_from cannot be blank!")
         parser.add_argument('valid_to', required=True, help="valid_to cannot be blank!")
-        args = parser.parse_args()        
+        args = parser.parse_args()
         sql_benefit = QUERY_SELECT_BENEFIT.format(args['members_no'], args['valid_from'], args['valid_to'])
         benefit = _fetch_data_in_database(sql_benefit)
         column = ['member_no', 'description', 'sum_part_time', 'sum_claim']
         items = [dict(zip(column, row)) for row in benefit]
         return items
-        
+
 class court_status(Resource):
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('date', required=True, help="date cannot be blank!")
-        args = parser.parse_args()        
+        args = parser.parse_args()
         sql_court_status = QUERY_SELECT_COURT_STATUS.format(args['date'])
         court_status = _fetch_data_in_database(sql_court_status)
         column = ['court_no', 'court_status_name', 'court_surface', 'court_type']
@@ -207,7 +209,7 @@ class court_status(Resource):
 class all_tasks(Resource):
     def get(self):
         parser = reqparse.RequestParser()
-        args = parser.parse_args()        
+        args = parser.parse_args()
         sql_all_tasks = QUERY_SELECT_ALL_TASKS
         all_tasks = _fetch_data_in_database(sql_all_tasks)
         column = ['task_no', 'title', 'description', 'created_at', 'modified_at', 'due_date', 'resolution_date', 'priority', 'task_status']
@@ -218,12 +220,12 @@ class task_detail(Resource):
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('task_no', required=True, help="task_no cannot be blank!")
-        args = parser.parse_args()        
+        args = parser.parse_args()
         sql_task_detail = QUERY_SELECT_TASK_DETAIL.format(args['task_no'])
         task_detail = _fetch_data_in_database(sql_task_detail)
         column = ['relationship_type', 'person_no', 'first_name', 'last_name']
         items = [dict(zip(column, row)) for row in task_detail]
-        return items        
+        return items
 
 api.add_resource(HelloWorld, '/')
 api.add_resource(benefit, '/benefit')
@@ -232,7 +234,7 @@ api.add_resource(all_tasks, '/all_tasks')
 api.add_resource(task_detail, '/task_detail')
 
 
-def _fetch_data_in_database(sql):    
+def _fetch_data_in_database(sql):
     connection = mysql.connect()
     cursor = connection.cursor()
     cursor.execute(sql)

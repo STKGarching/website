@@ -71,12 +71,11 @@ var DEFAULT_PARAMS = {
     extensions: [".js"]
   },
 
-  entry:
-    [
-      "webpack-dev-server/client?http://192.168.178.32/",
-      "webpack/hot/only-dev-server",
-      path.resolve(__dirname, "src/client/app/index.js")
-    ],
+  entry: [
+    "webpack-dev-server/client?http://192.168.178.32/",
+    "webpack/hot/only-dev-server",
+    path.resolve(__dirname, "client/app/index.js")
+  ],
   target: "web",
   output: {
     filename: "index.js",
@@ -88,7 +87,7 @@ var DEFAULT_PARAMS = {
   module: moduleObj,
   plugins: [
     new HtmlWebPackPlugin({
-      template: "src/client/app/index.html"
+      template: "client/app/index.html"
     }),
     new Dotenv()
   ]
@@ -113,19 +112,21 @@ var PARAMS_PER_TARGET = {
   DEV_SERVER: {
     devtool: "source-map",
     output: {
-      filename: "index.js"
+      filename: "index.js",
+      publicPath: "/"
     },
     mode: "development",
     devServer: {
       //public: "mirrorpi.ddns.net",
       //contentBase: path.join(__dirname, "dist/public/"),
-      //publicPath: "/dist/public/",
+      publicPath: "/",
       host: "127.0.0.1",
       port: 9000,
       https: false,
       headers: {
         "Access-Control-Allow-Origin": "*"
-      }
+      },
+      historyApiFallback: true
     }
   },
 
@@ -137,7 +138,6 @@ var PARAMS_PER_TARGET = {
     mode: "production",
     plugins: [new CleanWebpackPlugin(["dist/build"])]
   }
-
 };
 
 var target = _resolveBuildTarget(DEFAULT_TARGET);

@@ -17,7 +17,7 @@ export class HeaderView extends Component {
           loginRespect: true
         },
         {
-          link: "/profile/news",
+          link: "/profile",
           headerText: "Profil",
           loginRespect: this.props.authentication.get("isAuthenticated")
         },

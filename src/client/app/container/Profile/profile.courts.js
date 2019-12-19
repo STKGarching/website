@@ -5,15 +5,15 @@ import ProfileCourtsView from "./profile.courts.view";
 
 const mapStateToProps = state => {
   return {
-    profile: state.profileReducer.get("profile"),
-    courts: state.courtsReducer.get("courts")
+    profile: state.profileReducer.get("profile").toJS(),
+    courts: state.courtsReducer.get("courts").toJS()
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getCourtsStatus: () => {
-      dispatch(courtActions.getCourtsStatus());
+      dispatch(courtsActions.getCourtsStatus());
     }
   };
 };

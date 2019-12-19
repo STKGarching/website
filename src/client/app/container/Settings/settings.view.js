@@ -2,6 +2,9 @@ import React, { Component } from "react";
 //import * as AuthService from '../../helpers/auth';
 
 export class SettingsView extends Component {
+  componentDidMount() {
+
+  }
   render() {
     return (
       <section>
