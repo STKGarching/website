@@ -6,6 +6,7 @@ Follow these instructions to get the website running on your dev system:
 3. Set up Frontend. [Installation](#Installation) can be found here.
 4. Configure Webserver. In this case [Apache2](#Apache_Webserver).
 5. Run Website in DEV SERVER Mode: [here](#DEV_SERVER).
+6. [Contributing](#Contributing)
 
 # Frontend
 ## Prototyp
@@ -155,5 +156,16 @@ With the following .htaccess file you can set up the Proxy paths. It can be conf
   ProxyPassReverse / http://127.0.0.1:9000/
 
 </VirtualHost>
+
+```
+
+# Contributing
+Don't forget to update .gitignore file:
+```
+/src/client/app/helpers/auth0-variables.js
+/src/node_modules
+
+/src/yarn-error.log
+/src/yarn.lock
 
 ```
