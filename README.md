@@ -2,10 +2,10 @@
 
 Follow these instructions to get the website running on your dev system:
 1. Set up database. [See this section](#Database) for detailed installation hints.
-2. Handle REST API: [See this section](#REST API)
+2. Handle REST API: [See this section](#REST_API)
 3. Set up Frontend. [Installation](#Installation) can be found here.
-4. Configure Webserver. In this case [Apache2](Apache Webserver).
-5. Run Website in DEV SERVER Mode: [here](#DEV SERVER).
+4. Configure Webserver. In this case [Apache2](#Apache_Webserver).
+5. Run Website in DEV SERVER Mode: [here](#DEV_SERVER).
 
 # Frontend
 ## Prototyp
@@ -17,7 +17,7 @@ You can find a prototyp [here](https://marvelapp.com/55c77je). Prototype shows f
 ```
 yarn install
 ```
-3. Add file in /src/client/app/helpers/ with the name auth0-variables.js
+3. Add file in /src/client/app/helpers/ with the name auth0-variables.js.
 Content should be:
 ```
 export const AUTH_CONFIG = {
@@ -28,9 +28,10 @@ export const AUTH_CONFIG = {
 }
 ```
 domain and clientId can be found in Auth0 Account (see also next step for configuration). audience and callback are the dev website URLs.
+
 4. Configure Auth0 Application (contact Benni). Provide your URL for this step.
 
-## DEV SERVER
+## DEV_SERVER
 Before starting the dev website, handle this point [Apache2](Apache Webserver).
 Start DEV server with
 ```
@@ -93,7 +94,7 @@ There are benefits where the player or team has to contribute (sse table __contr
 The court status can be monitored. First application is the status due to weather conditions. Upcoming features are possible but will not implemented in first stage.  
 "Arbeitsdienst" should be organised by a task list (similar to JIRA)
 
-## REST API
+## REST_API
 Find more infos at /src/server/REST_API/static/README.md
 
 Start API in folder /src/server/REST_API/stk_api with  
@@ -101,7 +102,7 @@ Start API in folder /src/server/REST_API/stk_api with
 python3 api.py
 ```
 
-## Apache Webserver
+## Apache_Webserver
 The dev website (i.e. with Weboack Dev Server) and the REST API backend are running on localhost with different ports. In order to access the dev website from your home network, set up the apache webserver on your server machine and provide the dev website via Proxy Reverse.
 You need the following module:
 * mod_ssl
