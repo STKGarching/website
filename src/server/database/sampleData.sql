@@ -3,16 +3,16 @@
 -- -------
 
 -- Person
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (1,TRUE,1,'Max','Mustermann');
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (2,TRUE,2,'Paul','Panzer');
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (3,TRUE,3,'Boris','Banane');
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (4,TRUE,4,'Daniel','Düsentrieb');
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (5,TRUE,5,'Susi','Sorglos');
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (6,TRUE,6,'Nina','Nutzlos');
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (7,TRUE,7,'Sabine','Saubermann');
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (8,TRUE,8,'Maria','Mustermann');
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (9,FALSE,NULL,'Peter','Platzwart');
-INSERT INTO `club`.`person` (person_no,is_member,member_id,first_name,last_name) VALUES (10,TRUE,10,'Martin','Mannschaftslos');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (1,TRUE,1,'Max','Mustermann');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (2,TRUE,2,'Paul','Panzer');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (3,TRUE,3,'Boris','Banane');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (4,TRUE,4,'Daniel','Düsentrieb');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (5,TRUE,5,'Susi','Sorglos');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (6,TRUE,6,'Nina','Nutzlos');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (7,TRUE,7,'Sabine','Saubermann');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (8,TRUE,8,'Maria','Mustermann');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (9,FALSE,NULL,'Peter','Platzwart');
+INSERT INTO `club`.`person` (person_no,is_member,member_id,role_id,first_name,last_name) VALUES (10,TRUE,10,'Martin','Mannschaftslos');
 
 -- Image
 -- Image von Paul Panzer
