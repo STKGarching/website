@@ -3,11 +3,16 @@ import { connect } from "react-redux";
 import LoginView from "./login.view";
 
 const mapStateToProps = state => {
-  return { authentication: state.authenticationReducer.toJS() };
+  return {
+    authentication: state.authenticationReducer.toJS(),
+    profile: state.profileReducer.get("profile").toJS()
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    getProfileInfo: personNumber =>
+      dispatch(authenticationActions.getProfileInfo(personNumber)),
     loginSuccess: (profile, accessToken) =>
       dispatch(authenticationActions.loginSuccess(profile, accessToken)),
     loginError: error => dispatch(authenticationActions.loginError(error)),

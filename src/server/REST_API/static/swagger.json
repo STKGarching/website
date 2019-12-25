@@ -1,239 +1,406 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "description": "Das ist die STK Garching API. Für mehr informationen siehe dukumentation unten.",
-      "version": "1.0.0",
-      "title": "STK Garching API",
-      "termsOfService": "https://api.stk-garching.de/terms/",
-      "contact": {
-        "email": "max@mustermann.com"
-      },
-      "license": {
-        "name": "Apache 2.0",
-        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-      }
+  "swagger": "2.0",
+  "info": {
+    "description":
+      "Das ist die STK Garching API. Für mehr informationen siehe dukumentation unten.",
+    "version": "1.0.0",
+    "title": "STK Garching API",
+    "termsOfService": "https://api.stk-garching.de/terms/",
+    "contact": {
+      "email": "max@mustermann.com"
     },
-    "host": "api.stk-garching.de",
-    "paths": {
-      "/court_status": {
-        "get": {
-          "summary": "Get court status",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "date",
-              "required": true,
-              "type": "string",
-              "description": "Beschreibt den Status der Plätze zu einem bestimmten Zeitpunkt.",
-              "default": "json"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success response",
-              "schema": {
-                "$ref": "#/components/schemas/court_status"
-              }
-            },
-            "404": {
-              "description": "Failed. Request not found."
-            }
-          }
-        }
-      },
-      "/all_tasks": {
-        "get": {
-          "summary": "Eine Liste aller Task.",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "format",
-              "type": "string",
-              "description": "",
-              "default": "json"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success response",
-              "schema": {
-                "$ref": "#/components/schemas/all_tasks"
-              }
-            },
-            "404": {
-              "description": "Failed. Request not found."
-            }
-          }
-        }
-      },
-      "/task_details": {
-        "get": {
-          "summary": "Bei der Auswahl eines Task können zu diesem Detail Informationen geladen werden.",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "task_no",
-              "required": true,
-              "type": "integer",
-              "description": "Task nummer",
-              "default": "json"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success response",
-              "schema": {
-                "$ref": "#/components/schemas/task_details"
-              }
-            },
-            "404": {
-              "description": "Failed. Request not found."
-            }
-          }
-        }
-      },
-      "/benefit": {
-        "get": {
-          "summary": "Jedes eingeloggte Mitglied kann seine Benefits sehen.",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "members_no",
-              "required": true,
-              "type": "integer",
-              "description": "Mitglied nummer",
-              "default": "json"
-            },
-            {
-              "in": "query",
-              "name": "valid_from",
-              "required": true,
-              "type": "string",
-              "description": "gueltig ab",
-              "default": "json"  
-            },
-            {
-              "in": "query",
-              "name": "valid_to",
-              "required": true,
-              "type": "string",
-              "description": "gueltig bis",
-              "default": "json"  
-            }            
-          ],
-          "responses": {
-            "200": {
-              "description": "Success response",
-              "schema": {
-                "$ref": "#/components/schemas/benefit"
-              }
-            },
-            "404": {
-              "description": "Failed. Request not found."
-            }
-          }
-        }
-      },
-      "/contribution": {
-        "get": {
-          "summary": "toDo",
-          "parameters": [
-            {
-              "in": "query",
-              "name": "toDo",
-              "type": "string",
-              "description": "toDo",
-              "default": "json"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success response"
-            },
-            "404": {
-              "description": "Failed. Request not found."
-            }
-          }
-        }
-      }
-    },
-    "components": {
-      "schemas": {
-        "court_status": {
-          "type": "object",
-          "properties": {
-            "court_status_name": {
-              "type": "string",
-              "format": "string",
-              "example": "Bespielbar"
-            },
-            "court_no": {
-              "type": "integer",
-              "format": "integer",
-              "example": 1
-            },
-            "court_surface": {
-              "type": "string",
-              "format": "string",
-              "example": "Sand"
-            },
-            "court_type": {
-              "type": "string",
-              "format": "string",
-              "example": "Freiplatz"
-            }
-          }
-        },
-        "task_details": {
-            "type": "object",
-            "properties": {
-              "first_name": {
-                "type": "string",
-                "format": "string",
-                "example": "Peter"
-              },
-              "relationship_type": {
-                "type": "string",
-                "format": "string",
-                "example": "Ersteller"
-              },
-              "person_no": {
-                "type": "integer",
-                "format": "integer",
-                "example": 1
-              },
-              "last_name": {
-                "type": "string",
-                "format": "string",
-                "example": "Platzwart"
-              }
-              }
-            },
-            "benefit": {
-                "type": "object",
-                "properties": {
-                  "member_no": {
-                    "type": "integer",
-                    "format": "integer",
-                    "example": 3
-                  },
-                  "sum_part_time": {
-                    "type": "float",
-                    "format": "float",
-                    "example": 115.84541055999998
-                  },
-                  "sum_claim": {
-                    "type": "float",
-                    "format": "float",
-                    "example": 115.84541055999998
-                  },
-                  "description": {
-                    "type": "string",
-                    "format": "string",
-                    "example": "Hallentraining Herren am Samstag"
-                  }
-                  }
-                }
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
-   }
+  },
+  "host": "api.stk-garching.de",
+  "paths": {
+    "/person_info": {
+      "get": {
+        "summary": "Get infos on the user with specific person_no",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "person_no",
+            "required": true,
+            "type": "integer",
+            "description": "",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/person_info"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
+    "/court_status_list": {
+      "get": {
+        "summary": "Eine Liste aller möglichen Status.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "format",
+            "type": "string",
+            "description": "",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/court_status_list"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
+    "/court_status": {
+      "get": {
+        "summary": "Get court status",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "date",
+            "required": true,
+            "type": "string",
+            "description":
+              "Beschreibt den Status der Plätze zu einem bestimmten Zeitpunkt.",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/court_status"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
+    "/court_status/update": {
+      "get": {
+        "summary": "Update court status",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "court_id",
+            "required": true,
+            "type": "integer",
+            "description": "Platz ID.",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "court_status_list_id",
+            "required": true,
+            "type": "integer",
+            "description": "Neuer Platzstatus.",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "valid_from",
+            "required": true,
+            "type": "string",
+            "description": "Zeitpunkt zu dem der Platz einen neuen Status hat.",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "valid_to",
+            "required": true,
+            "type": "string",
+            "description": "Zeitpunkt bis zu dem der Status des Platzes gilt.",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "changed_by",
+            "required": true,
+            "type": "string",
+            "description": "Nutzer der die Änderung druchgeführt hat",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/court_status_update"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
+    "/all_tasks": {
+      "get": {
+        "summary": "Eine Liste aller Task.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "format",
+            "type": "string",
+            "description": "",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/all_tasks"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
+    "/task_details": {
+      "get": {
+        "summary":
+          "Bei der Auswahl eines Task können zu diesem Detail Informationen geladen werden.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "task_no",
+            "required": true,
+            "type": "integer",
+            "description": "Task nummer",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/task_details"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
+    "/benefit": {
+      "get": {
+        "summary": "Jedes eingeloggte Mitglied kann seine Benefits sehen.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "members_no",
+            "required": true,
+            "type": "integer",
+            "description": "Mitglied nummer",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "valid_from",
+            "required": true,
+            "type": "string",
+            "description": "gueltig ab",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "valid_to",
+            "required": true,
+            "type": "string",
+            "description": "gueltig bis",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/benefit"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
+    "/contribution": {
+      "get": {
+        "summary": "toDo",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "toDo",
+            "type": "string",
+            "description": "toDo",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response"
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "person_info": {
+        "type": "object",
+        "properties": {
+          "person_no": {
+            "type": "integer",
+            "format": "integer",
+            "example": 1
+          },
+          "first_name": {
+            "type": "string",
+            "format": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "format": "string",
+            "example": "Doe"
+          },
+          "member_no": {
+            "type": "integer",
+            "format": "integer",
+            "example": 1
+          },
+          "role": {
+            "type": "string",
+            "format": "string",
+            "example": "Admin"
+          }
+        }
+      },
+      "court_status_list": {
+        "type": "object",
+        "properties": {
+          "court_status_list_id": {
+            "type": "integer",
+            "format": "integer",
+            "example": 1
+          },
+          "court_status_name": {
+            "type": "string",
+            "format": "string",
+            "example": "Bespielbar"
+          }
+        }
+      },
+      "court_status": {
+        "type": "object",
+        "properties": {
+          "court_status_name": {
+            "type": "string",
+            "format": "string",
+            "example": "Bespielbar"
+          },
+          "court_id": {
+            "type": "integer",
+            "format": "integer",
+            "example": 1
+          },
+          "court_surface": {
+            "type": "string",
+            "format": "string",
+            "example": "Sand"
+          },
+          "court_type": {
+            "type": "string",
+            "format": "string",
+            "example": "Freiplatz"
+          }
+        }
+      },
+      "court_status_update": {
+        "type": "object",
+        "properties": {
+          "update_status": {
+            "type": "integer",
+            "format": "integer",
+            "example": 1
+          }
+        }
+      },
+      "task_details": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "format": "string",
+            "example": "Peter"
+          },
+          "relationship_type": {
+            "type": "string",
+            "format": "string",
+            "example": "Ersteller"
+          },
+          "person_no": {
+            "type": "integer",
+            "format": "integer",
+            "example": 1
+          },
+          "last_name": {
+            "type": "string",
+            "format": "string",
+            "example": "Platzwart"
+          }
+        }
+      },
+      "benefit": {
+        "type": "object",
+        "properties": {
+          "member_no": {
+            "type": "integer",
+            "format": "integer",
+            "example": 3
+          },
+          "sum_part_time": {
+            "type": "float",
+            "format": "float",
+            "example": 115.84541055999998
+          },
+          "sum_claim": {
+            "type": "float",
+            "format": "float",
+            "example": 115.84541055999998
+          },
+          "description": {
+            "type": "string",
+            "format": "string",
+            "example": "Hallentraining Herren am Samstag"
+          }
+        }
+      }
+    }
   }
+}

@@ -20,8 +20,8 @@ export class LoginView extends Component {
           return this.props.loginError(error);
         }
         AuthService.setToken(authResult.idToken, authResult.accessToken); // static method
-        const memberNo = AuthService.getTokenMemberNo()
-        profile['memberNo'] = memberNo
+        const personNumber = AuthService.getTokenPersonNumber();
+        profile["personNumber"] = personNumber;
         AuthService.setProfile(profile); // static method
         this.props.loginSuccess(profile, authResult.accessToken);
         this.props.historyPush("/");
@@ -41,6 +41,15 @@ export class LoginView extends Component {
         remainingLoginTimeUpdate: true
       });
     }, 1000);
+
+    if (
+      this.props.authentication.isAuthenticated &&
+      this.props.profile.personNumber === null &&
+      !(this.props.authentication.profile.personNumber === undefined)
+    ) {
+      console.log("test");
+      this.props.getProfileInfo(this.props.authentication.profile.personNumber);
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -52,6 +61,9 @@ export class LoginView extends Component {
       // automatic logout when token expires.
       this.handleLogoutClick();
     }
+
+
+
   }
 
   handleLoginTime = () => {

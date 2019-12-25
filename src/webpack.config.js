@@ -72,7 +72,7 @@ var DEFAULT_PARAMS = {
   },
 
   entry: [
-    "webpack-dev-server/client?http://192.168.178.32/",
+    "webpack-dev-server/client?http://192.168.178.44/",
     "webpack/hot/only-dev-server",
     path.resolve(__dirname, "client/app/index.js")
   ],

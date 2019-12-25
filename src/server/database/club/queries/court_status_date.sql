@@ -1,6 +1,7 @@
 set @var_date:='2019-07-15 00:00:00';
 
 SELECT
+    c.court_id
     cs.court_no,
     csl.court_status_name,
     c.court_surface,

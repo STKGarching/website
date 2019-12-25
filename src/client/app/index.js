@@ -33,7 +33,8 @@ const fakeProfile = {};
 store.dispatch({
   type: "SET_STATE_COURTS_STATUS",
   state: {
-    courts: []
+    courts: [],
+    courtStatusList: []
   }
 });
 
@@ -41,6 +42,11 @@ store.dispatch({
   type: "SET_STATE_PROFILE",
   state: {
     profile: {
+      personNumber: null,
+      firstName: "",
+      lastName: "",
+      member_no: null,
+      roles: [],
       initialPageload: true,
       landingPage: "/"
     }

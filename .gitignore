@@ -1,1 +1,6 @@
-src/server/database/data2020.sql
+/src/server/database/data2020.sql
+/src/client/app/helpers/auth0-variables.js
+/src/node_modules
+
+/src/yarn-error.log
+/src/yarn.lock

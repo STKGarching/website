@@ -9,6 +9,7 @@ then
 fi
 
 read -p "Enter mysql username: "  username
+read -p "Enter mysql password: "  password
 
 
 if [ ${#file} -eq 1 ]
@@ -63,8 +64,8 @@ do
   # no empty lines and no comments
   if [ ${#line} -gt 1 ] && [ ${line:0:1} != "#" ]
   then
-    #mysql -h "hostname" -u usr_name -p PASSWD "db_name" < ${line} > out_file	
-	mysql -h localhost -u $username -p < ${line} > out_file
+    #mysql -h "hostname" -u usr_name -p PASSWD "db_name" < ${line} > out_file
+	mysql -h localhost -u$username -p$password < ${line} > out_file
     echo -e "${line} proccessed"
   fi
 done < "$file"

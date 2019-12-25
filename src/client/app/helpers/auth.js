@@ -84,8 +84,8 @@ export const getTokenExpirationDate = () => {
   return decoded.exp;
 };
 
-export const getTokenMemberNo = () => {
-  const key = "http://stkgarching/member_no";
+export const getTokenPersonNumber = () => {
+  const key = "http://stkgarching/person_no";
   const token = getAccessToken();
   const decoded = jwtDecode(token);
   if (!decoded[key]) {

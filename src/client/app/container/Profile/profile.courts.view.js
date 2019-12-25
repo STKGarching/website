@@ -4,11 +4,19 @@ import _ from "lodash";
 export class CourtsView extends Component {
   constructor(props) {
     super(props);
-    this.state = { courtTypes: ["Freiplatz", "Halle"], courtSummary: {} };
+    this.state = {
+      courtTypes: ["Freiplatz", "Halle"],
+      courtSummary: {},
+      courtStatusList: [
+        { court_status_list_id: 1, court_status_name: "dummy1" },
+        { court_status_list_id: 2, court_status_name: "dummy2" }
+      ]
+    };
   }
 
   componentDidMount() {
     this.props.getCourtsStatus();
+    this.props.getCourtStatusList();
   }
 
   getCourts(courtType) {
@@ -62,6 +70,20 @@ export class CourtsView extends Component {
     }
   }
 
+  handleCourtUpdate = (
+    courtId,
+    courtStatusListId,
+    courtStatusName,
+    personNumber
+  ) => {
+    this.props.setCourtsStatus(
+      courtId,
+      courtStatusListId,
+      courtStatusName,
+      personNumber
+    );
+  };
+
   render() {
     return (
       <section className="main">
@@ -80,13 +102,38 @@ export class CourtsView extends Component {
               <ul className="courtlist">
                 {this.getCourts(type).map(court => {
                   return (
-                    <li key={court.court_no + court.court_type}>
+                    <li key={court.court_id}>
                       <CourtCard
                         courtNumber={court.court_no}
                         courtType={court.court_type}
                         courtSurface={court.court_surface}
                         courtStatusName={court.court_status_name}
                       />
+                      {this.props.courtStatusList.map(status => {
+                        return (
+                          <a
+                            key={status.court_status_list_id}
+                            onClick={() => {
+                              if (
+                                !_.isEqual(
+                                  court.court_status_name,
+                                  status.court_status_name
+                                )
+                              ) {
+                                this.handleCourtUpdate(
+                                  court.court_id,
+                                  status.court_status_list_id,
+                                  status.court_status_name,
+                                  this.props.profile.personNumber
+                                );
+                              }
+                            }}
+                          >
+                            {" "}
+                            {status.court_status_name}
+                          </a>
+                        );
+                      })}
                     </li>
                   );
                 })}
