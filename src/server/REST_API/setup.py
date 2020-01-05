@@ -7,5 +7,5 @@ setup(
    author='Miro',
    author_email='miro@example.com',
    packages=['stk_api'], 
-   install_requires=['flask_swagger_ui', 'flask-mysql']
+   install_requires=['flask_swagger_ui', 'flask-mysql', 'flask-cors', 'flask_restful']
 )
