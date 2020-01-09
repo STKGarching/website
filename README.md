@@ -85,19 +85,23 @@ In order to prevent password prompting, see [here](https://blog.sleeplessbeastie
 
 **Install first data model**
 
-Create two new schemas (DDLs are not written yet):
-* sport
-* club
+Create a database named **stkgarching**
 
-Initial installation of all tables, procedures and functions.
+Installation of backbone functions and tables. Initial script creates schemas.
 ```
 install.sh 1
 ```
 
-Installation of sample data
+Initial installation of all tables and views and trigger.
 ```
 install.sh 2
 ```
+
+Installation of sample data
+```
+install.sh 3
+```
+
 
 ### File structure
 **src/server/**
