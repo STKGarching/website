@@ -1,16 +1,18 @@
 -- -----------------------------------------------------
--- Table `club`.`comment`
+-- Table club.comment
 --
 -- Kommentar Relationships;
 -- Ersteller (unique)
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `club`.`comment` ;
+SELECT
+    root.f_check_if_table_exists ('club',
+        'comment',
+        TRUE);
 
-CREATE TABLE IF NOT EXISTS `club`.`comment` (
-	`comment_id` INT NOT NULL AUTO_INCREMENT,
-	`title` VARCHAR(256) NOT NULL,
-	`comment` VARCHAR(256) NOT NULL,
-	`created_at` DATE NOT NULL,
-	`modified_at` DATE NOT NULL,
-	PRIMARY KEY (`comment_id`))
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS club.comment (
+        comment_id BIGSERIAL PRIMARY KEY,
+        title VARCHAR(256) NOT NULL,
+        COMMENT VARCHAR(256) NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL,
+        modified_at TIMESTAMPTZ NOT NULL
+);

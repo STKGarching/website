@@ -10,8 +10,19 @@ import "./index.css";
 import AppContainer from "./app";
 import { history } from "./helpers/helpers";
 import { profileLandingPages } from "./constants/constants";
+import yaml from "js-yaml";
 //import registerServiceWorker from "./registerServiceWorker";
+/*
+try {
+  var doc = yaml.safeLoad(config);
 
+  console.log(doc);
+
+} catch (e) {
+  console.log(e);
+}
+*/
+console.log(__config__)
 const store = createStore(
   rootReducer,
   compose(

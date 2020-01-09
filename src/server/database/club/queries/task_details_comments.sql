@@ -1,4 +1,4 @@
-set @var_task_no:=2;
+-- {0}: @var_task_no:=2;
 
 -- Kommentare eines Tickets
 SELECT
@@ -28,4 +28,4 @@ WHERE
         AND r.target = 'comment'
         AND r_comment.source = 'comment'
         AND r_comment.target = 'person'
-        AND t.task_no = @var_task_no;
+        AND t.task_no = {0};

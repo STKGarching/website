@@ -1,4 +1,4 @@
-set @var_person_no:=9;
+--{0} @var_person_no:=9;
 
 SELECT
     p.person_no, p.first_name, p.last_name, p.member_no, ro.role
@@ -12,4 +12,4 @@ FROM
     club.role ro ON r.target_id = ro.role_id
 WHERE 1 = 1
 AND rt.relationship_type_no = 6
-AND p.person_no = @var_person_no
+AND p.person_no = {0}

@@ -6,13 +6,17 @@ from flask_restful import reqparse
 from flask_swagger_ui import get_swaggerui_blueprint
 from flaskext.mysql import MySQL
 import json
+import yaml
+
+with open(r'../../../../config.yaml') as file:
+    config = yaml.load(file, Loader=yaml.FullLoader)
 
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_USER'] = 'admin'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
+app.config['MYSQL_DATABASE_USER'] = config['database']['username']
+app.config['MYSQL_DATABASE_PASSWORD'] = config['database']['password']
 app.config['MYSQL_DATABASE_DB'] = 'sport'
 
 ### swagger specific ###

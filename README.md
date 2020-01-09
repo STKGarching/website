@@ -46,7 +46,38 @@ The Webpack dev server has a hot reloading module. You can change the code and t
 ### Installation
 **The following information are for setting up and running the database on a raspberry pi**
 
-1. Install mySQL Database and setup a user: [Tutorial](https://www.stewright.me/2014/06/tutorial-install-mysql-server-on-raspberry-pi/)
+1. Install Postgres database:
+1.1. Installation:
+Go here for a [Tutorial](https://opensource.com/article/17/10/set-postgres-database-your-raspberry-pi).
+Short installation guide:
+```
+sudo apt install postgresql libpq-dev postgresql-client
+postgresql-client-common -y
+```
+Set up user:
+```
+sudo su postgres
+```
+and
+```
+createuser pi -P --interactive
+```
+Set superuser N and the next two questions Y.
+1.2. Password Management
+[If you intend to force password authentication](https://gist.github.com/AtulKsol/4470d377b448e56468baef85af7fd614) over Unix sockets instead of the peer method, try changing the following pg_hba.conf in /etc/postgres/... line from
+```
+# TYPE DATABASE USER ADDRESS METHOD
+local  all      all          peer
+```
+to
+```
+# TYPE DATABASE USER ADDRESS METHOD
+local  all      all          md5
+```
+This solves the error **psql: FATAL: Peer authentication failed for user “postgres” (or any user)**
+
+In order to prevent password prompting, see [here](https://blog.sleeplessbeastie.eu/2014/03/23/how-to-non-interactively-provide-password-for-the-postgresql-interactive-terminal/).
+
 2. In order to use the custom install script set up a my.cnf file (Keep in mind, this is not secure but suitable for development): [Simple Tutorial](https://easyengine.io/tutorials/mysql/mycnf-preference/)
 3. The DDL scripts for tables, functions and procdures as well as sample Data Input can be found in src/server. To setup the DB one can install the project files.  
   3.1. Project files contain a list of DDL script files. Comment lines need a #-prefix. They have the folling naming convention (regex): P\d{4}.conf  

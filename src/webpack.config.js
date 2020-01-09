@@ -2,6 +2,8 @@ const path = require("path");
 var _ = require("lodash");
 var minimist = require("minimist");
 var chalk = require("chalk");
+var yaml = require("js-yaml");
+var fs = require("fs");
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 
 const smp = new SpeedMeasurePlugin();
@@ -12,6 +14,23 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
+
+// TODO: autmatische Erkennung des WIFI
+const wifi = "TLAN";
+var env = {};
+try {
+  var config = yaml.safeLoad(fs.readFileSync("../config.yaml", "utf8"));
+  config.env.forEach(ssid => {
+    if (ssid.SSID === wifi) {
+      env = ssid;
+    }
+  });
+
+  env.auth0 = config.auth0[wifi];
+} catch (e) {
+  console.log(e);
+}
 
 const moduleObj = {
   rules: [
@@ -72,7 +91,7 @@ var DEFAULT_PARAMS = {
   },
 
   entry: [
-    "webpack-dev-server/client?http://192.168.178.44/",
+    "webpack-dev-server/client?http://" + env.baseURL + "/",
     "webpack/hot/only-dev-server",
     path.resolve(__dirname, "client/app/index.js")
   ],
@@ -89,7 +108,8 @@ var DEFAULT_PARAMS = {
     new HtmlWebPackPlugin({
       template: "client/app/index.html"
     }),
-    new Dotenv()
+    new Dotenv(),
+    new webpack.DefinePlugin({ __config__: JSON.stringify(env) })
   ]
 };
 

@@ -4,4 +4,4 @@ SELECT
     c.court_surface,
     c.court_type
 FROM
-    club.v_court_status c;
+    club.v_court_status_frontend c;

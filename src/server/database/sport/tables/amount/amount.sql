@@ -1,10 +1,12 @@
 -- -----------------------------------------------------
--- Table `sport`.`amount`
+-- Table sport.amount
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sport`.`amount` ;
+SELECT
+    root.f_check_if_table_exists ('sport',
+        'amount',
+        TRUE);
 
-CREATE TABLE IF NOT EXISTS `sport`.`amount` (
-	`amount_id` INT NOT NULL AUTO_INCREMENT,
-	`amount_name` VARCHAR(256) NOT NULL,
-	PRIMARY KEY (`amount_id`)) 
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS sport.amount (
+        amount_id SERIAL PRIMARY KEY,
+        amount_name VARCHAR(256) NOT NULL
+);

@@ -1,5 +1,5 @@
 -- -----------------------------------------------------
--- Table `club`.`task`
+-- Table club.task
 --
 -- Ticket Relationships:
 -- Ersteller (unique)
@@ -7,18 +7,20 @@
 -- Kommentar (multiple)
 -- Abnehmer (multiple)
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `club`.`task` ;
+SELECT
+    root.f_check_if_table_exists ('club',
+        'task',
+        TRUE);
 
-CREATE TABLE IF NOT EXISTS `club`.`task` (
-	`task_id` INT NOT NULL AUTO_INCREMENT,
-	`task_no` INT NOT NULL,
-	`title` VARCHAR(256) NOT NULL,
-	`description` BLOB,
-	`task_priority_id` INT NOT NULL,
-	`created_at` DATE NOT NULL,
-	`modified_at` DATE NOT NULL,
-	`due_date` DATE,
-	`task_status_id` INT,
-	`resolution_date` DATE,
-	PRIMARY KEY (`task_id`))
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS club.task (
+        task_id BIGSERIAL PRIMARY KEY,
+        task_no INT NOT NULL,
+        title VARCHAR(256) NOT NULL,
+        description TEXT,
+        task_priority_id INT NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL,
+        modified_at TIMESTAMPTZ NOT NULL,
+        due_date TIMESTAMPTZ,
+        task_status_id INT,
+        resolution_date TIMESTAMPTZ
+);

@@ -1,14 +1,15 @@
 -- -----------------------------------------------------
--- Table `club`.`court_status`
+-- Table club.court_status
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `club`.`court_status` ;
+SELECT root.f_drop_config('club','court_status',NULL);
 
-CREATE TABLE IF NOT EXISTS `club`.`court_status` (
-	`court_status_id` INT NOT NULL AUTO_INCREMENT,
-	`court_id` INT NOT NULL,
-	`court_status_list_id` VARCHAR(256) NOT NULL,
-	`valid_from` DATETIME NOT NULL,
-	`valid_to` DATETIME NOT NULL,
-	`changed_by` INT NOT NULL,
-	PRIMARY KEY (`court_status_id`))
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS club.court_status (
+	--court_status_id SERIAL,
+	court_id INT NOT NULL,
+	court_status_list_id INT NOT NULL,
+	valid_from TIMESTAMPTZ NOT NULL,
+	valid_to TIMESTAMPTZ NOT NULL,
+	modified_at TIMESTAMPTZ NOT NULL,
+	changed_by TEXT NOT NULL,
+	PRIMARY KEY (court_id,valid_to)
+);

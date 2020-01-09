@@ -4,3 +4,5 @@
 
 /src/yarn-error.log
 /src/yarn.lock
+
+config.yaml

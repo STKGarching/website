@@ -1,14 +1,21 @@
 -- -----------------------------------------------------
--- Table `sport`.`claim`
+-- Table sport.claim
 -- Claimable Benefits, e.g. tournaments, are listed here when they are really used by the player or team.
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sport`.`claim` ;
+SELECT
+    root.f_check_if_table_exists ('sport',
+        'claim',
+        TRUE);
 
-CREATE TABLE IF NOT EXISTS `sport`.`claim` (
-	`claim_id` INT NOT NULL AUTO_INCREMENT,
-	`benefit_id` INT NOT NULL,
-	`description` VARCHAR(256) NULL COMMENT 'optional description of the claim',
-	`created_at` DATE NOT NULL,
-	`value` DECIMAL(8,2) COMMENT 'The value in EUR.',
-	PRIMARY KEY (`claim_id`))
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS sport.claim (
+        claim_id SERIAL PRIMARY KEY,
+        benefit_id INT NOT NULL,
+        description VARCHAR(256) NULL,
+        created_at TIMESTAMPTZ NOT NULL,
+        value DECIMAL (8,
+            2)
+);
+
+COMMENT ON COLUMN claim.description IS 'optional description of the claim';
+
+COMMENT ON COLUMN claim.value IS 'The value in EUR.';

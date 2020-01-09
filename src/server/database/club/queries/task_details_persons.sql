@@ -1,4 +1,4 @@
-set @var_task_no:=2;
+-- {0} @var_task_no:=2;
 
 -- Personen eines Tickets
 SELECT
@@ -18,4 +18,4 @@ FROM
 WHERE
     1 = 1 AND r.source = 'task'
         AND r.target = 'person'
-        AND t.task_no = @var_task_no;
+        AND t.task_no = {0};

@@ -1,11 +1,13 @@
 -- -----------------------------------------------------
--- Table `club`.`relationship_type`
+-- Table club.relationship_type
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `club`.`relationship_type` ;
+SELECT
+    root.f_check_if_table_exists ('club',
+        'relationship_type',
+        TRUE);
 
-CREATE TABLE IF NOT EXISTS `club`.`relationship_type` (
-	`relationship_type_id` INT NOT NULL AUTO_INCREMENT,
-	`relationship_type_no` INT NOT NULL,
-	`relationship_type` VARCHAR(256) NOT NULL,
-	PRIMARY KEY (`relationship_type_id`))
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS club.relationship_type (
+        relationship_type_id SERIAL PRIMARY KEY,
+        relationship_type_no INT NOT NULL,
+        relationship_type VARCHAR(256) NOT NULL
+);
