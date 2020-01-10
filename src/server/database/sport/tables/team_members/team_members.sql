@@ -2,9 +2,9 @@
 -- Table sport.team
 -- -----------------------------------------------------
 SELECT
-    root.f_check_if_table_exists ('sport',
+    root.f_drop_config ('sport',
         'team_members',
-        TRUE);
+        NULL);
 
 CREATE TABLE IF NOT EXISTS sport.team_members (
         team_members_id SERIAL PRIMARY KEY,

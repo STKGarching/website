@@ -2,9 +2,9 @@
 -- Table sport.benefit
 -- -----------------------------------------------------
 SELECT
-    root.f_check_if_table_exists ('sport',
+    root.f_drop_config ('sport',
         'benefit',
-        TRUE);
+        NULL);
 
 CREATE TABLE IF NOT EXISTS sport.benefit (
         benefit_id SERIAL PRIMARY KEY,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS sport.benefit (
         description VARCHAR(256) NULL,
         valid_from TIMESTAMPTZ NOT NULL,
         valid_to TIMESTAMPTZ NOT NULL,
-        COUNT DECIMAL (8,
+        count DECIMAL (8,
             2) NOT NULL,
         amount_id INT NOT NULL,
         value DECIMAL (8,

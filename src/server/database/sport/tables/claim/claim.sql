@@ -3,9 +3,9 @@
 -- Claimable Benefits, e.g. tournaments, are listed here when they are really used by the player or team.
 -- -----------------------------------------------------
 SELECT
-    root.f_check_if_table_exists ('sport',
+    root.f_drop_config ('sport',
         'claim',
-        TRUE);
+        NULL);
 
 CREATE TABLE IF NOT EXISTS sport.claim (
         claim_id SERIAL PRIMARY KEY,

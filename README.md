@@ -18,17 +18,10 @@ You can find a prototyp [here](https://marvelapp.com/55c77je). Prototype shows f
 ```
 yarn install
 ```
-3. Add file in /src/client/app/helpers/ with the name auth0-variables.js.
-Content should be:
-```
-export const AUTH_CONFIG = {
-  domain: '{auto0 domain}',
-  clientId: '{auto0 clientId}',
-  audience: '{auto0 audience}',
-  callbackUrl: '{auto0 callbackUrl}'
-}
-```
-domain and clientId can be found in Auth0 Account (see also next step for configuration). audience and callback are the dev website URLs.
+3. Create file config.yaml and add it to .gitignore.
+See config.example.yaml for input.
+
+**Auth0**: domain and clientId can be found in Auth0 Account (see also next step for configuration). audience and callback are the dev website URLs.
 
 4. Configure Auth0 Application (contact Benni). Provide your URL for this step.
 
@@ -60,7 +53,7 @@ sudo su postgres
 ```
 and
 ```
-createuser pi -P --interactive
+createuser admin -P --interactive
 ```
 Set superuser N and the next two questions Y.
 1.2. Password Management
@@ -197,10 +190,10 @@ With the following .htaccess file you can set up the Proxy paths. It can be conf
 # Contributing
 Don't forget to update .gitignore file:
 ```
-/src/client/app/helpers/auth0-variables.js
 /src/node_modules
 
 /src/yarn-error.log
 /src/yarn.lock
 
+config.yaml
 ```
