@@ -8,7 +8,7 @@ SELECT
 
 CREATE TABLE IF NOT EXISTS club.image (
         image_id BIGSERIAL PRIMARY KEY,
-        NAME VARCHAR(256) NOT NULL,
+        name VARCHAR(256) NOT NULL,
         url VARCHAR(256) NOT NULL,
         created_at TIMESTAMPTZ NOT NULL,
         modified_at TIMESTAMPTZ NOT NULL

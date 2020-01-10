@@ -8,9 +8,9 @@
 -- Abnehmer (multiple)
 -- -----------------------------------------------------
 SELECT
-    root.f_check_if_table_exists ('club',
+    root.f_drop_config ('club',
         'task',
-        TRUE);
+        NULL);
 
 CREATE TABLE IF NOT EXISTS club.task (
         task_id BIGSERIAL PRIMARY KEY,

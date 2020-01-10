@@ -4,9 +4,9 @@
 -- Extra payments can be a financial participation for courts, trainer, balls, etc. but also donations
 -- -----------------------------------------------------
 SELECT
-    root.f_check_if_table_exists ('sport',
+    root.f_drop_config ('sport',
         'contribution',
-        TRUE);
+        NULL);
 
 CREATE TABLE IF NOT EXISTS sport.contribution (
         contribution_id SERIAL PRIMARY KEY,

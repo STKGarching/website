@@ -9,5 +9,5 @@ SELECT
 CREATE TABLE IF NOT EXISTS club.role (
         role_id SERIAL PRIMARY KEY,
         role_no INT NOT NULL,
-        ROLE VARCHAR(256) NOT NULL
+        role VARCHAR(256) NOT NULL
 );
