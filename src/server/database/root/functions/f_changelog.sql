@@ -64,17 +64,17 @@ BEGIN
     $Dynamic$,
     context)::TEXT;
     sql_changelog:= FORMAT($Dynamic$ IF TG_OP = 'UPDATE' THEN
-            INSERT INTO changelog (changegroup_id, table_name, column_name, column_data_type, old_value, new_value)
+            INSERT INTO root.changelog (changegroup_id, table_name, column_name, column_data_type, old_value, new_value)
         SELECT
             CURRVAL(PG_GET_SERIAL_SEQUENCE('changegroup', 'changegroup_id')), '%s' AS table_name, UNNEST(ARRAY [ %s ]) AS column_name, UNNEST(ARRAY [ %s ]) AS column_data_type, UNNEST(ARRAY [ %s ]) AS old_value, UNNEST(ARRAY [ %s ]) AS new_value;
             RETURN NEW;
             ELSEIF TG_OP = 'INSERT' THEN
-            INSERT INTO changelog (changegroup_id, table_name, column_name, column_data_type, old_value, new_value)
+            INSERT INTO root.changelog (changegroup_id, table_name, column_name, column_data_type, old_value, new_value)
         SELECT
             CURRVAL(PG_GET_SERIAL_SEQUENCE('changegroup', 'changegroup_id')), '%s' AS table_name, UNNEST(ARRAY [ %s ]) AS column_name, UNNEST(ARRAY [ %s ]) AS column_data_type, NULL AS old_value, UNNEST(ARRAY [ %s ]) AS new_value;
             RETURN NEW;
             ELSEIF TG_OP = 'DELETE' THEN
-            INSERT INTO changelog (changegroup_id, table_name, column_name, column_data_type, old_value, new_value)
+            INSERT INTO root.changelog (changegroup_id, table_name, column_name, column_data_type, old_value, new_value)
         SELECT
             CURRVAL(PG_GET_SERIAL_SEQUENCE('changegroup', 'changegroup_id')), '%s' AS table_name, UNNEST(ARRAY [ %s ]) AS column_name, UNNEST(ARRAY [ %s ]) AS column_data_type, UNNEST(ARRAY [ %s ]) AS old_value, NULL AS new_value;
             RETURN OLD;

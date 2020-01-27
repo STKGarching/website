@@ -7,21 +7,29 @@ from flask_swagger_ui import get_swaggerui_blueprint
 from flaskext.mysql import MySQL
 import json
 import yaml
+import psycopg2
 
-with open(r'../../../../config.yaml') as file:
-    config = yaml.load(file, Loader=yaml.FullLoader)
+#with open(r'../../../../config.yaml') as file:
+#    config = yaml.load(file, Loader=yaml.FullLoader)
 
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_USER'] = config['database']['username']
-app.config['MYSQL_DATABASE_PASSWORD'] = config['database']['password']
-app.config['MYSQL_DATABASE_DB'] = 'sport'
+### mysql stuff start ###
+#app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+#app.config['MYSQL_DATABASE_USER'] = config['database']['username']
+#app.config['MYSQL_DATABASE_PASSWORD'] = config['database']['password']
+#app.config['MYSQL_DATABASE_DB'] = 'sport'
+### mysql stuff end ###
+
+### postgresql stuff start ###
+connection = psycopg2.connect(host="localhost",database="stkgarching", user="admin", password="admin")
+### postgresql stuff end ###
+
 
 ### swagger specific ###
-SWAGGER_URL = '/swagger'
-API_URL = '/static/swagger.json'
+SWAGGER_URL = "/swagger"
+API_URL = "/static/swagger.json"
 SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
@@ -126,78 +134,104 @@ SELECT
     basis.member_no,
     basis.description,
     basis.sum_part_time,
-    IF(basis.is_claimable,
-        basis.sum_claim,
-        basis.sum_part_time) AS sum_claim
-FROM
-    (SELECT
-        p.member_no,
-            b.description,
-            -- Benefits die vom Betrachtungszeitraum abweichen sollen nur anteilig eingerechnet werden.
-            sport.date_period_part({1},{2},b.valid_from,b.valid_to) * IF(ISNULL(b.value), b.cap_sum_value, b.count * b.value) / cnt_team_members AS sum_part_time,
-            c.value / cnt_team_members AS sum_claim,
-            b.is_claimable
-    FROM
-        sport.benefit b
-    -- Die Summe der tatsächlich eingeforderten Benefitsumme pro benefit_id
-    LEFT JOIN (SELECT
-        c.benefit_id, SUM(c.value) AS value
-    FROM
-        sport.claim c
-    WHERE
-        1 = 1 AND c.created_at >= {1}
-            AND c.created_at < {2}
-    GROUP BY c.benefit_id) c ON c.benefit_id = b.benefit_id
-    LEFT JOIN sport.team t ON b.entity_id = t.team_id
-    LEFT JOIN sport.team_members tm ON t.team_id = tm.team_id
-    LEFT JOIN (SELECT
-        tm.team_id, COUNT(*) AS cnt_team_members
-    FROM
-        sport.team_members tm
-    WHERE
-        1 = 1 AND tm.is_main_team = TRUE
-    GROUP BY team_id) tm_count ON tm.team_id = tm_count.team_id
-    LEFT JOIN sport.player p ON tm.player_id = p.player_id
-    LEFT JOIN club.person pers ON p.member_no = p.member_no
-    WHERE
-        1 = 1 AND entity = 'team'
-            AND p.member_no = {0}
-            AND ((b.valid_from <= {1}
-            AND b.valid_to > {1})
-            OR (b.valid_from < {2}
-            AND b.valid_to >= {2})
-            OR (b.valid_from >= {1}
-            AND b.valid_from < {2}))
-	UNION
-  -- Benefits pro Einzelspieler
+    CASE WHEN basis.is_claimable THEN
+        basis.sum_claim
+    ELSE
+        basis.sum_part_time
+    END AS sum_claim
+FROM (
     SELECT
         p.member_no,
-            b.description,
-            -- Benefits die vom Betrachtungszeitraum abweichen sollen nur anteilig eingerechnet werden.
-            sport.date_period_part({1},{2},b.valid_from,b.valid_to) * IF(ISNULL(b.value), b.cap_sum_value, b.count * b.value) AS sum_part_time,
-            c.value AS sum_claim,
-            b.is_claimable
-    FROM
-        sport.benefit b
-    LEFT JOIN sport.player p ON b.entity_id = p.player_id
-    -- Die Summe der tatsächlich eingeforderten Benefitsumme pro benefit_id
-    LEFT JOIN (SELECT
-        c.benefit_id, SUM(c.value) AS value
-    FROM
-        sport.claim c
-    WHERE
-        1 = 1 AND c.created_at >= {1}
+        b.description, -- Benefits die vom Betrachtungszeitraum abweichen sollen nur anteilig eingerechnet werden.
+        sport.f_date_period_part ({1},
+            {2},
+            b.valid_from,
+            b.valid_to) * CASE WHEN b.value IS NULL THEN
+            b.cap_sum_value
+        ELSE
+            b.count * b.value
+END / cnt_team_members AS sum_part_time,
+c.value / cnt_team_members AS sum_claim,
+b.is_claimable
+FROM
+    sport.benefit b -- Die Summe der tatsächlich eingeforderten Benefitsumme pro benefit_id
+    LEFT JOIN (
+        SELECT
+            c.benefit_id,
+            SUM(c.value) AS value
+        FROM
+            sport.claim c
+        WHERE
+            1 = 1
+            AND c.created_at >= {1}
             AND c.created_at < {2}
-    GROUP BY c.benefit_id) c ON c.benefit_id = b.benefit_id
+        GROUP BY
+            c.benefit_id) c ON c.benefit_id = b.benefit_id
+    LEFT JOIN sport.team t ON b.entity_id = t.team_id
+    LEFT JOIN sport.team_members tm ON t.team_id = tm.team_id
+    LEFT JOIN (
+        SELECT
+            tm.team_id,
+            COUNT(*) AS cnt_team_members
+        FROM
+            sport.team_members tm
+        WHERE
+            1 = 1
+            AND tm.is_main_team = TRUE
+        GROUP BY
+            team_id) tm_count ON tm.team_id = tm_count.team_id
+    LEFT JOIN sport.player p ON tm.player_id = p.player_id
     LEFT JOIN club.person pers ON p.member_no = p.member_no
-    WHERE
-        1 = 1 AND entity = 'player'
-            AND p.member_no = {0}
-            AND ((b.valid_from <= {1}
+WHERE
+    1 = 1
+    AND entity = 'team'
+    AND p.member_no = {0}
+    AND ((b.valid_from <= {1}
             AND b.valid_to > {1})
-            OR (b.valid_from < {2}
+        OR (b.valid_from < {2}
             AND b.valid_to >= {2})
-            OR (b.valid_from >= {1}
+        OR (b.valid_from >= {1}
+            AND b.valid_from < {2}))
+UNION
+-- Benefits pro Einzelspieler
+SELECT
+    p.member_no,
+    b.description, -- Benefits die vom Betrachtungszeitraum abweichen sollen nur anteilig eingerechnet werden.
+    sport.f_date_period_part ({1},
+        {2},
+        b.valid_from,
+        b.valid_to) * CASE WHEN b.value IS NULL THEN
+        b.cap_sum_value
+    ELSE
+        b.count * b.value
+    END AS sum_part_time,
+    c.value AS sum_claim,
+    b.is_claimable
+FROM
+    sport.benefit b
+    LEFT JOIN sport.player p ON b.entity_id = p.player_id -- Die Summe der tatsächlich eingeforderten Benefitsumme pro benefit_id
+    LEFT JOIN (
+        SELECT
+            c.benefit_id,
+            SUM(c.value) AS value
+        FROM
+            sport.claim c
+        WHERE
+            1 = 1
+            AND c.created_at >= {1}
+            AND c.created_at < {2}
+        GROUP BY
+            c.benefit_id) c ON c.benefit_id = b.benefit_id
+    LEFT JOIN club.person pers ON p.member_no = p.member_no
+WHERE
+    1 = 1
+    AND entity = 'player'
+    AND p.member_no = {0}
+    AND ((b.valid_from <= {1}
+            AND b.valid_to > {1})
+        OR (b.valid_from < {2}
+            AND b.valid_to >= {2})
+        OR (b.valid_from >= {1}
             AND b.valid_from < {2}))) basis
 
 """
@@ -306,7 +340,7 @@ api.add_resource(task_detail, '/task_detail')
 
 
 def _fetch_data_in_database(sql):
-    connection = mysql.connect()
+    #connection = mysql.connect()
     cursor = connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()

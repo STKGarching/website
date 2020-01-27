@@ -53,7 +53,7 @@ done < "$file"
 #abort when at least one file in the conf does not exist.
 if [ ${counter} -gt 0 ]
 then
-   echo -e "Exit -> files are missing. Counter ${counter}"	
+   echo -e "Exit -> files are missing. Count missing files ${counter}"	
    exit -1
 fi
 
