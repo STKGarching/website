@@ -32,3 +32,8 @@ Beschreibung: Jedes eingeloggte Mitglied kann seine Benefits sehen. Dazu muss da
 
 ### 6. /contribution
 Beschreibung: ToDo
+
+### 7. insert_person
+Beschreibung: Jedes Mitglied kann hinzugefügen.
+
+`http://localhost:5000/insert_person?person_no=99&is_member=true&member_no=99&first_name='Test_Name'&last_name='Test_Nachname'`

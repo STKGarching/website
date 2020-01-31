@@ -1,7 +1,7 @@
 /src/server/database/data2020.sql
 /src/node_modules
-
+.vscode
 /src/yarn-error.log
 /src/yarn.lock
-
+__pycache__
 config.yaml

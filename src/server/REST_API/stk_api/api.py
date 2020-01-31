@@ -236,6 +236,11 @@ WHERE
 
 """
 
+QUERY_INSERT_PERSON = """
+    INSERT INTO club.person (person_no, is_member, member_no, first_name, last_name)
+    VALUES ({0}, COALESCE({1}, FALSE), {2}, {3}, {4})
+"""
+
 class HelloWorld(Resource):
     def get(self):
         return """
@@ -274,8 +279,6 @@ class benefit(Resource):
 
 class court_status_list(Resource):
     def get(self):
-        parser = reqparse.RequestParser()
-        args = parser.parse_args()
         sql_court_status_list = QUERY_SELECT_COURT_STATUS_LIST
         all_court_status_list = _fetch_data_in_database(sql_court_status_list)
         column = ['court_status_list_id', 'court_status_name']
@@ -309,9 +312,7 @@ class court_status_update(Resource):
         return items
 
 class all_tasks(Resource):
-    def get(self):
-        parser = reqparse.RequestParser()
-        args = parser.parse_args()
+    def get(self):       
         sql_all_tasks = QUERY_SELECT_ALL_TASKS
         all_tasks = _fetch_data_in_database(sql_all_tasks)
         column = ['task_no', 'title', 'description', 'created_at', 'modified_at', 'due_date', 'resolution_date', 'priority', 'task_status']
@@ -329,6 +330,17 @@ class task_detail(Resource):
         items = [dict(zip(column, row)) for row in task_detail]
         return items
 
+class insert_person(Resource):
+    def put(self):
+        person_no = request.args.get('person_no')
+        is_member =  request.args.get('is_member')
+        member_no = request.args.get('member_no')
+        first_name = request.args.get('first_name')
+        last_name = request.args.get('last_name')
+        sql_insert_person = QUERY_INSERT_PERSON.format(person_no, is_member, member_no, first_name, last_name)
+        _insert_data_into_database(sql_insert_person)
+        return 201
+
 api.add_resource(HelloWorld, '/')
 api.add_resource(person_info, '/person_info')
 api.add_resource(benefit, '/benefit')
@@ -337,6 +349,7 @@ api.add_resource(court_status, '/court_status')
 api.add_resource(court_status_update, '/court_status/update')
 api.add_resource(all_tasks, '/all_tasks')
 api.add_resource(task_detail, '/task_detail')
+api.add_resource(insert_person, '/insert_person')
 
 
 def _fetch_data_in_database(sql):
@@ -345,6 +358,13 @@ def _fetch_data_in_database(sql):
     cursor.execute(sql)
     result = cursor.fetchall()
     return result
+
+def _insert_data_into_database(sql):    
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
+    cursor.close()
+       
 
 if __name__ == '__main__':
     app.run(debug=True)
