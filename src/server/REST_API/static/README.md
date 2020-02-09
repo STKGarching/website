@@ -30,7 +30,7 @@ Beschreibung: Jedes eingeloggte Mitglied kann seine Benefits sehen. Dazu muss da
 
 `http://127.0.0.1:5000/benefit?members_no=1&valid_from='2019-01-01 00:00:00'&valid_to='2020-01-01 00:00:00'`
 
-### 6. /contribution
+### 6. contribution
 Beschreibung: ToDo
 
 ### 7. add_person
@@ -46,7 +46,7 @@ Beschreibung: Person informationen abrufen
 ### 9. Court status liste
 Beschreibung: Liefert den Status der Plätze
 
-http://127.0.0.1:5000/court_status_list
+`http://127.0.0.1:5000/court_status_list`
 
 ### 10. Add court
 Beschreibung: Ein Platz hinzufügen
