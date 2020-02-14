@@ -57,3 +57,24 @@ Beschreibung: Ein Platz hinzufügen
 Beschreibung: Liefert den Status aller Plätze für ein bestimmtes Datum
 
 `http://127.0.0.1:5000/get_court_status_date?date='2019-07-15 00:00:00'`
+
+### 12. Add court status
+Beschreibung: Status des Platzes hinzufügren
+
+`http://localhost:5000/add_court_status?court_id=2&court_status_list_id=2&valid_from=2019-01-01 00:00:00&valid_to=2019-01-01 00:00:00&modified_at=&changed_by=Sred`
+
+### 13. Get court status list
+Beschriebung: Liefert mögliche Platzstatus zurück
+
+`http://localhost:5000/get_court_status_list`
+
+### 14. Get court status now
+Beschriebung: Liefert jetztigen Status der Plätze
+
+`http://localhost:5000/get_court_status_now`
+
+### 15. Get personen info
+Beschriebung: Liefert personen info
+
+`localhost:5000/get_personen_info?person_no=9`
+
