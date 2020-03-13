@@ -9,21 +9,20 @@ Beschriebung: Alle Infos zu API
 
 `http://127.0.0.1:5000/swagger`
 
-### 2. court_status
+### 2. get_court_status
 Beschreibung: Beschreibt den Status der Plätze zu einem bestimmten Zeitpunkt. Aktuell soll nur dargstellt werden ob der Platz gesperrt oder bespielbar ist.
 
-`http://127.0.0.1:5000/court_status?date='2019-07-15 00:00:00'`
+`http://127.0.0.1:5000/get_court_status?date='2019-07-15 00:00:00'`
 
-### 3. all_tasks
+### 3. get_all_tasks
 Beschreibung: Eine Liste aller Task.
 
-`http://127.0.0.1:5000/all_tasks`
+`http://127.0.0.1:5000/get_all_tasks`
 
 ### 4. task_details
 Beschreibung: Bei der Auswahl eines Task können zu diesem Detail Informationen  geladen werden.
 
 `http://127.0.0.1:5000/task_detail?task_no=5`
-
 
 ### 5. benefit
 Beschreibung: Jedes eingeloggte Mitglied kann seine Benefits sehen. Dazu muss das Mitglied eingeloggt sein.
@@ -76,5 +75,9 @@ Beschriebung: Liefert jetztigen Status der Plätze
 ### 15. Get personen info
 Beschriebung: Liefert personen info
 
-`localhost:5000/get_personen_info?person_no=9`
+`http://localhost:5000/get_personen_info?person_no=9`
 
+### 16. Get task comments
+Beschriebung: Liefert kommentare eines Tickets
+
+`http://localhost:5000/get_task_comments?task_no=2`
