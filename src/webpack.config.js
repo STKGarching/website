@@ -16,8 +16,21 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
 
-// TODO: autmatische Erkennung des WIFI
-const wifi = "TLAN";
+// Wifi
+var wifi = minimist(process.argv.slice(2)).WIFI;
+if (!wifi) {
+  console.log(chalk.bold.red("No WIFI provided! Add Argument with --WIFI=YourWifiSSID\n"));
+  console.log(chalk.bold.red("Check also confg.yaml!\n\n"));
+  process.exit(1);
+}
+console.log("WIFI: " + wifi)
+// Source: Local or DDNS
+var source = minimist(process.argv.slice(2)).SOURCE;
+if (!source) {
+  source = "local"
+}
+console.log("SOURCE: " + source)
+
 var env = {};
 try {
   var config = yaml.safeLoad(fs.readFileSync("../config.yaml", "utf8"));
@@ -27,7 +40,7 @@ try {
     }
   });
 
-  env.auth0 = config.auth0[wifi];
+  env.auth0 = config.auth0[wifi][source];
 } catch (e) {
   console.log(e);
 }
@@ -91,7 +104,9 @@ var DEFAULT_PARAMS = {
   },
 
   entry: [
-    "webpack-dev-server/client?http://" + env.baseURL + "/",
+    "webpack-dev-server/client?http://" + env.baseURL[source] + "/",
+    //"webpack-dev-server/client?" + env.schema[source]  + env.baseURL[source] + "/",
+    //"webpack-dev-server/client?" + env.schema["local"]  + env.baseURL["lcoal"] + "/",
     "webpack/hot/only-dev-server",
     path.resolve(__dirname, "client/app/index.js")
   ],
@@ -139,6 +154,7 @@ var PARAMS_PER_TARGET = {
     devServer: {
       //public: "mirrorpi.ddns.net",
       //contentBase: path.join(__dirname, "dist/public/"),
+      disableHostCheck: true,
       publicPath: "/",
       host: "127.0.0.1",
       port: 9000,

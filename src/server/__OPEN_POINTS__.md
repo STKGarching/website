@@ -51,3 +51,9 @@ Wie kann ich sicher sein, dass der User mir die richtige person_id liefert? Wenn
 Lösung:
 Es wird die person_no genommen. Dieses Feld wird bei der Registierung über Auth0 mit der Auth-userid befüllt. Diese ID kann man im Access Token unter dem key "sub" finden. dadurch kann
 bei allen Abfragen bei denen eine Authentifizierung des User notwenig ist, immer die userid aus dem Token genommen werden. Somit wird sichergestellt, dass der User berechtigt ist auf die REST API zuzugreifen und auch, welcher User es ist.
+
+## REST_API Python Packages installieren
+
+Problem: Nach dem letzten Pull konnte ich die API nicht starten da Packages gefehlt haben
+
+Lösung: irgendein Installskript?

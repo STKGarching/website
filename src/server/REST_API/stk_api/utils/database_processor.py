@@ -1,6 +1,11 @@
 import psycopg2
+import yaml
+import os.path 
 
-connection = psycopg2.connect(host="localhost",database="stkgarching", user="admin", password="admin")
+with open(os.path.dirname(__file__) + '/../../../../../config.yaml') as file:
+    credentials = yaml.load(file,Loader=yaml.FullLoader)
+
+connection = psycopg2.connect(host="localhost",database="stkgarching", user=credentials["database"]["username"], password=credentials["database"]["password"])
 def fetch_data_in_database(sql):
     #connection = mysql.connect()
     cursor = connection.cursor()

@@ -34,13 +34,14 @@ function getCourtsStatus() {
     method: "get",
     url:
       baseURL_REST_API +
-      `court_status?date=%27${now.format("YYYY-MM-DD")}%20${now.format(
+      `get_court_status?date=%27${now.format("YYYY-MM-DD")}%20${now.format(
         "HH:mm:ss"
       )}%27`
     //url: "https://192.168.178.44/stkapi/court_status?date=%272019-07-15%2000:00:00%27"
     //url: "https://127.0.0.1:5000/court_status?date=%272019-07-15%2000:00:00%27"
     //headers: header
   };
+  console.log(requestOptions)
 
   const request = axios(requestOptions).then(response => {
     return { response: response, options: requestOptions };

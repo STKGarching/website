@@ -10,7 +10,7 @@ export class HomeView extends Component {
         return (
             <div>
               <h1>
-                Willkommen auf der Website des STK Garching
+                Willkommen auf der Website des STK Garching!
               </h1>
               {this.props.authentication.get('isAuthenticated') && (
                 <p>Hallo <b>{this.getProfile()}</b></p>
