@@ -1,3 +1,30 @@
+# Development
+## Frontend Prototyp
+You can find a prototyp [here](https://marvelapp.com/55c77je). Prototype shows functionality of the Progressive Web App.
+
+## Tasks and Project Plan
+You can find the project plan at [Trelloe](https://trello.com/b/Do45Kbgf/stk-website)
+
+## Deployment
+### Github
+1. Create your own branch an work there on your tasks.
+2. When ready, pull latest master repository from github
+3. merge your branch to master and push immediately 
+
+### Build and Deploy to Hosting Server
+tbd...
+
+## Contributing
+Don't forget to update .gitignore file:
+```
+/src/node_modules
+
+/src/yarn-error.log
+/src/yarn.lock
+
+config.yaml
+```
+
 # Get website running
 
 Follow these instructions to get the website running on your dev system:
@@ -9,9 +36,6 @@ Follow these instructions to get the website running on your dev system:
 6. [Contributing](#Contributing)
 
 # Frontend
-## Prototyp
-You can find a prototyp [here](https://marvelapp.com/55c77je). Prototype shows functionality of the Progressive Web App.
-
 ## Installation
 1. Get [yarn package](https://www.npmjs.com/package/yarn)
 2. install all dependencies in base Folder:
@@ -29,9 +53,11 @@ See config.example.yaml for input.
 Before starting the dev website, handle this point [Apache2](Apache Webserver).
 Start DEV server with
 ```
-yarn run dev-server
+yarn run dev-server --SOURCE={yourSource} --WIFI={yourWifi}
 ```
 
+SOURCE: Depending on your config.yaml the website is deliverd per DDNS or on your local WIFI. However, for getting the corret REST API URL, the source is important
+WIFI: Depending on your wifi, the source may have different URLs or IPs.   
 The Webpack dev server has a hot reloading module. You can change the code and the website will be reloaded automatically.
 
 # Backend
@@ -132,7 +158,7 @@ python3 api.py
 ```
 
 ## Apache_Webserver
-The dev website (i.e. with Weboack Dev Server) and the REST API backend are running on localhost with different ports. In order to access the dev website from your home network, set up the apache webserver on your server machine and provide the dev website via Proxy Reverse.
+The dev website (i.e. with Webpack Dev Server) and the REST API backend are running on localhost with different ports. In order to access the dev website from your home network or from DDNS, set up the apache webserver on your server machine and provide the dev website via Proxy Reverse.
 You need the following module:
 * mod_ssl
 * mod_rewrite
@@ -150,8 +176,24 @@ With the following .htaccess file you can set up the Proxy paths. It can be conf
     SSLEngine On
     SSLCertificateFile /etc/letsencrypt/live/mirrorpi.ddns.net/fullchain.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/mirrorpi.ddns.net/privkey.pem
+    RewriteEngine On
 
-    ProxyRequests On
+    # STK API
+    RewriteCond %{REQUEST_URI}  stkapi                                               [NC]
+    RewriteRule /(.*)           http://127.0.0.1:5000/%{REQUEST_URI}?%{QUERY_STRING} [P,L]
+
+    # socket.io 1.0+ starts all connections with an HTTP polling request
+    RewriteCond %{QUERY_STRING} transport=polling       [NC]
+    RewriteRule /(.*)           http://127.0.0.1:9000/$1 [P]
+
+    # When socket.io wants to initiate a WebSocket connection, it sends an
+    # "upgrade: websocket" request that should be transferred to ws://
+    RewriteCond %{HTTP:Upgrade} websocket               [NC,OR]
+    RewriteCond %{HTTP:CONNECTION} upgrade              [NC]
+    RewriteRule /(.*)           ws://127.0.0.1:9000/$1  [P]
+
+    ProxyPass / http://127.0.0.1:9000/
+    ProxyPassReverse / http://127.0.0.1:9000/
 
     ProxyPass /stkapi http://127.0.0.1:5000
     ProxyPassReverse /stkapi http://127.0.0.1:5000
@@ -169,31 +211,27 @@ With the following .htaccess file you can set up the Proxy paths. It can be conf
   RewriteEngine On
 
   # STK API
-  RewriteCond %{REQUEST_URI}  stkapi                   [NC]
-  RewriteCond %{QUERY_STRING} transport=polling        [NC]
-  RewriteRule /(.*)           http://127.0.0.1:5000/$1 [P]
+  RewriteCond %{REQUEST_URI}  stkapi                                               [NC]
+  RewriteRule /(.*)           http://127.0.0.1:5000/%{REQUEST_URI}?%{QUERY_STRING} [P,L]
 
   # socket.io 1.0+ starts all connections with an HTTP polling request
-  # Use this for hot reloading!
   RewriteCond %{QUERY_STRING} transport=polling       [NC]
   RewriteRule /(.*)           http://127.0.0.1:9000/$1 [P]
-  RewriteCond %{HTTP:Upgrade} websocket               [NC]
+  
+  # When socket.io wants to initiate a WebSocket connection, it sends an
+  # "upgrade: websocket" request that should be transferred to ws://
+  RewriteCond %{HTTP:Upgrade} websocket               [NC,OR]
+  RewriteCond %{HTTP:CONNECTION} upgrade              [NC]
   RewriteRule /(.*)           ws://127.0.0.1:9000/$1  [P]
 
   ProxyPass / http://127.0.0.1:9000/
   ProxyPassReverse / http://127.0.0.1:9000/
 
+  ProxyPass /stkapi http://127.0.0.1:5000
+  ProxyPassReverse /stkapi http://127.0.0.1:5000
+
 </VirtualHost>
 
 ```
 
-# Contributing
-Don't forget to update .gitignore file:
-```
-/src/node_modules
 
-/src/yarn-error.log
-/src/yarn.lock
-
-config.yaml
-```

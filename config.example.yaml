@@ -2,24 +2,37 @@
 # General       #
 #################
 env:
-    - { SSID: WFIF1 ,baseURL: 1.1.1.1 }
-    - { SSID: WIFI2 ,baseURL: 8.8.8.8 }
-
+    - {
+          SSID: WFIF1,
+          schema: { ddns: https://, local: http:// },
+          baseURL: { local: 1.1.113 }
+      }
+    - {
+          SSID: WIFI2,
+          schema: { ddns: https://, local: http:// },
+          baseURL: { ddns: mywebsite.ddns.net, local: 8.8.8.8 }
+      }
+      
 #################
 # Auth0         #
 #################
 auth0:
-  AUTH_CONFIG: !!map
       WFIF1:
           domain: stkgarching.eu.auth0.com
           clientId: sjdklfjasölkj
           audience: http://1.1.1.1
           callbackUrl: http://1.1.1.1/callback
       WIFI2:
-          domain: stkgarching.eu.auth0.com
-          clientId: hkjsdhfkjsdhfk
-          audience: http://8.8.8.8
-          callbackUrl: http://8.8.8.8 /callback
+            ddns:
+                domain: stkgarching.eu.auth0.com
+                clientId: köjklj
+                audience: https://mywebsite.ddns.net
+                callbackUrl: https://mywebsite.ddns.net /callback
+            local:
+                domain: stkgarching.eu.auth0.com
+                clientId: hkjsdhfkjsdhfk
+                audience: http://8.8.8.8
+                callbackUrl: http://8.8.8.8 /callback
 
 #################
 # Database      #
