@@ -1,50 +1,27 @@
-const path = require("path");
+/****************************
+Packages
+****************************/
+var fs = require("fs");
+var path = require("path");
 var _ = require("lodash");
 var minimist = require("minimist");
 var chalk = require("chalk");
 var yaml = require("js-yaml");
-var fs = require("fs");
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-
-const smp = new SpeedMeasurePlugin();
+/****************************
+Plugins
+****************************/
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
-
-//const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const webpack = require("webpack");
+//const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
 
-// Wifi
-var wifi = minimist(process.argv.slice(2)).WIFI;
-if (!wifi) {
-  console.log(chalk.bold.red("No WIFI provided! Add Argument with --WIFI=YourWifiSSID\n"));
-  console.log(chalk.bold.red("Check also confg.yaml!\n\n"));
-  process.exit(1);
-}
-console.log("WIFI: " + wifi)
-// Source: Local or DDNS
-var source = minimist(process.argv.slice(2)).SOURCE;
-if (!source) {
-  source = "local"
-}
-console.log("SOURCE: " + source)
-
-var env = {};
-try {
-  var config = yaml.safeLoad(fs.readFileSync("../config.yaml", "utf8"));
-  config.env.forEach(ssid => {
-    if (ssid.SSID === wifi) {
-      env = ssid;
-    }
-  });
-
-  env.auth0 = config.auth0[wifi][source];
-} catch (e) {
-  console.log(e);
-}
-
+/****************************
+Implement Modules
+****************************/
 const moduleObj = {
   rules: [
     {
@@ -96,8 +73,46 @@ const moduleObj = {
   ]
 };
 
+/****************************
+Basic Config
+****************************/
+const smp = new SpeedMeasurePlugin();
+
+// Wifi 
+var wifi = minimist(process.argv.slice(2)).WIFI;
+if (!wifi) {
+  console.log(chalk.bold.red("No WIFI provided! Add Argument with --WIFI=YourWifiSSID\n"));
+  console.log(chalk.bold.red("Check also confg.yaml!\n\n"));
+  process.exit(1);
+}
+console.log("WIFI: " + wifi)
+// Source: Local or DDNS
+var source = minimist(process.argv.slice(2)).SOURCE;
+if (!source) {
+  source = "local"
+}
+console.log("SOURCE: " + source)
+
+// Read Config.yaml
+var env = {};
+try {
+  var config = yaml.safeLoad(fs.readFileSync("../config.yaml", "utf8"));
+  config.env.forEach(ssid => {
+    if (ssid.SSID === wifi) {
+      env = ssid;
+    }
+  });
+  env.auth0 = config.auth0[wifi][source];
+} catch (e) {
+  console.log(e);
+}
+
 var DEFAULT_TARGET = "BUILD";
 
+/****************************
+Webpack Options
+****************************/
+// Generel parameter configuration for every webpack build
 var DEFAULT_PARAMS = {
   resolve: {
     extensions: [".js"]
@@ -105,8 +120,6 @@ var DEFAULT_PARAMS = {
 
   entry: [
     "webpack-dev-server/client?http://" + env.baseURL[source] + "/",
-    //"webpack-dev-server/client?" + env.schema[source]  + env.baseURL[source] + "/",
-    //"webpack-dev-server/client?" + env.schema["local"]  + env.baseURL["lcoal"] + "/",
     "webpack/hot/only-dev-server",
     path.resolve(__dirname, "client/app/index.js")
   ],
@@ -115,9 +128,6 @@ var DEFAULT_PARAMS = {
     filename: "index.js",
     path: path.resolve(__dirname, "dist/public")
   },
-  // externals: {
-  //     'auth0-lock': 'Auth0Lock'
-  // },
   module: moduleObj,
   plugins: [
     new HtmlWebPackPlugin({
@@ -128,6 +138,7 @@ var DEFAULT_PARAMS = {
   ]
 };
 
+// Special Parameters: Depending on args TARGET
 var PARAMS_PER_TARGET = {
   DEV: {
     devtool: "source-map",
@@ -152,8 +163,6 @@ var PARAMS_PER_TARGET = {
     },
     mode: "development",
     devServer: {
-      //public: "mirrorpi.ddns.net",
-      //contentBase: path.join(__dirname, "dist/public/"),
       disableHostCheck: true,
       publicPath: "/",
       host: "127.0.0.1",
@@ -168,14 +177,15 @@ var PARAMS_PER_TARGET = {
 
   BUILD: {
     output: {
-      path: path.resolve(__dirname, "dist/build")
+      path: path.join(__dirname, "/../build")
     },
     devtool: "source-map",
     mode: "production",
-    plugins: [new CleanWebpackPlugin(["dist/build"])]
+    plugins: [new CleanWebpackPlugin([])]
   }
 };
 
+// Merge Default Parameters with speical parameters
 var target = _resolveBuildTarget(DEFAULT_TARGET);
 var params = _.merge(
   DEFAULT_PARAMS,
@@ -183,9 +193,14 @@ var params = _.merge(
   _mergeArraysCustomizer
 );
 
+// Console Output
 _printBuildInfo(target, params);
+// Webpack execution
 module.exports = smp.wrap(params);
 
+
+// Help Functions
+// Get Target from args of command line
 function _resolveBuildTarget(defaultTarget) {
   var target = minimist(process.argv.slice(2)).TARGET;
   if (!target) {
@@ -195,6 +210,7 @@ function _resolveBuildTarget(defaultTarget) {
   return target;
 }
 
+// Write Console Output Function
 function _printBuildInfo(target, params) {
   console.log("\nStarting " + chalk.bold.green('"' + target + '"') + " build");
   if (target === "DEV_SERVER") {
@@ -210,6 +226,7 @@ function _printBuildInfo(target, params) {
   }
 }
 
+// Merge Arrays
 function _mergeArraysCustomizer(a, b) {
   if (_.isArray(a)) {
     return a.concat(b);
