@@ -3,14 +3,19 @@
 #################
 env:
     - {
-          SSID: WFIF1,
+          env: WFIF1,
           schema: { ddns: https://, local: http:// },
           baseURL: { local: 1.1.113 }
       }
     - {
-          SSID: WIFI2,
+          env: WIFI2,
           schema: { ddns: https://, local: http:// },
           baseURL: { ddns: mywebsite.ddns.net, local: 8.8.8.8 }
+      }
+    - {
+          env: prod,
+          schema: { prod: https://, stage: http:// },
+          baseURL: { prod: www.mywebsite.de, stage: www.mywebsite.de }
       }
       
 #################

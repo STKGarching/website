@@ -79,13 +79,13 @@ Basic Config
 const smp = new SpeedMeasurePlugin();
 
 // Wifi 
-var wifi = minimist(process.argv.slice(2)).WIFI;
-if (!wifi) {
-  console.log(chalk.bold.red("No WIFI provided! Add Argument with --WIFI=YourWifiSSID\n"));
+var myEnv = minimist(process.argv.slice(2)).ENV;
+if (!myEnv) {
+  console.log(chalk.bold.red("No Environment provided! Add Argument with --ENV=YourENV\n"));
   console.log(chalk.bold.red("Check also confg.yaml!\n\n"));
   process.exit(1);
 }
-console.log("WIFI: " + wifi)
+console.log("My Environment: " + myEnv)
 // Source: Local or DDNS
 var source = minimist(process.argv.slice(2)).SOURCE;
 if (!source) {
@@ -97,12 +97,12 @@ console.log("SOURCE: " + source)
 var env = {};
 try {
   var config = yaml.safeLoad(fs.readFileSync("../config.yaml", "utf8"));
-  config.env.forEach(ssid => {
-    if (ssid.SSID === wifi) {
-      env = ssid;
+  config.env.forEach(realEnv => {
+    if (realEnv.env === myEnv) {
+      env = realEnv;
     }
   });
-  env.auth0 = config.auth0[wifi][source];
+  env.auth0 = config.auth0[myEnv][source];
 } catch (e) {
   console.log(e);
 }
@@ -176,12 +176,17 @@ var PARAMS_PER_TARGET = {
   },
 
   BUILD: {
+    entry: path.resolve(__dirname, "client/app/index.js"),
     output: {
       path: path.join(__dirname, "/../build")
     },
     devtool: "source-map",
     mode: "production",
-    plugins: [new CleanWebpackPlugin([])]
+    plugins: [new CleanWebpackPlugin(), new HtmlWebPackPlugin({
+      hash: true,
+      filename: path.join(__dirname, "/../build/index.html")
+    })
+    ]
   }
 };
 
@@ -216,13 +221,16 @@ function _printBuildInfo(target, params) {
   if (target === "DEV_SERVER") {
     console.log(
       "Dev server: " +
-        chalk.bold.yellow(
-          "http://localhost:" + params.devServer.port + "/lokal"
-        ) +
-        "\n\n"
+      chalk.bold.yellow(
+        "http://localhost:" + params.devServer.port + "/lokal"
+      ) +
+      "\n\n"
     );
   } else {
-    console.log("\n\n");
+    console.log(chalk.bold.red("Webpack Parameter"));
+    console.log(chalk.bold.red("---------------------------------"));
+    console.log(params);
+    console.log(chalk.bold.red("---------------------------------"));
   }
 }
 
