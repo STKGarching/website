@@ -14,8 +14,60 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "api.stk-garching.de",
+  "host": "localhost:5000",
   "paths": {
+    "/get_court_status": {
+      "get": {
+        "summary": "Get court status",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "date",
+            "required": true,
+            "type": "string",
+            "description":
+              "Beschreibt den Status der Plätze zu einem bestimmten Zeitpunkt. http://127.0.0.1:5000/get_court_status?date='2019-07-15 00:00:00'",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/get_court_status"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
+    "/get_all_tasks": {
+      "get": {
+        "summary": "Eine Liste aller Task.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "format",
+            "type": "string",
+            "description": "",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/get_all_tasks"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
     "/person_info": {
       "get": {
         "summary": "Get infos on the user with specific person_no",
@@ -59,33 +111,6 @@
             "description": "Success response",
             "schema": {
               "$ref": "#/components/schemas/court_status_list"
-            }
-          },
-          "404": {
-            "description": "Failed. Request not found."
-          }
-        }
-      }
-    },
-    "/court_status": {
-      "get": {
-        "summary": "Get court status",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "date",
-            "required": true,
-            "type": "string",
-            "description":
-              "Beschreibt den Status der Plätze zu einem bestimmten Zeitpunkt.",
-            "default": "json"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success response",
-            "schema": {
-              "$ref": "#/components/schemas/court_status"
             }
           },
           "404": {
