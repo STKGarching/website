@@ -17,7 +17,7 @@ from api_resource import upload_file
 
 app = Flask(__name__)
 CORS(app)
-api = Api(app)
+stkapi = Api(app)
 
 ### swagger specific ###
 SWAGGER_URL = "/swagger/"
@@ -59,28 +59,28 @@ class get_personen_info(Resource):
         return items
 
 
-api.add_resource(hello_api.HelloAPI, '/')
-api.add_resource(all_tasks.GetAllTasks, '/get_all_tasks', resource_class_kwargs={ 'database_processor': database_processor} )
-api.add_resource(person_info.PersonInfo, '/person_info')
-api.add_resource(court_status.GetCourtStatus, '/get_court_status')
-api.add_resource(court_status_list.CourtStatusList, '/court_status_list')
-api.add_resource(benefit.Benefit, '/benefit')
-api.add_resource(court_status_update.courtStatusUpdate, '/court_status/update')
-api.add_resource(task_detail.TaskDetail, '/task_detail')
-api.add_resource(add_person.AddPerson, '/add_person')
-api.add_resource(court_status_date.GetCourtStatusDate,
+stkapi.add_resource(hello_api.HelloAPI, '/')
+stkapi.add_resource(all_tasks.GetAllTasks, '/get_all_tasks', resource_class_kwargs={ 'database_processor': database_processor} )
+stkapi.add_resource(person_info.PersonInfo, '/person_info')
+stkapi.add_resource(court_status.GetCourtStatus, '/get_court_status')
+stkapi.add_resource(court_status_list.CourtStatusList, '/court_status_list')
+stkapi.add_resource(benefit.Benefit, '/benefit')
+stkapi.add_resource(court_status_update.courtStatusUpdate, '/court_status/update')
+stkapi.add_resource(task_detail.TaskDetail, '/task_detail')
+stkapi.add_resource(add_person.AddPerson, '/add_person')
+stkapi.add_resource(court_status_date.GetCourtStatusDate,
                  '/get_court_status_date')
-api.add_resource(add_court_status.AddCourtStatus, '/add_court_status')
-api.add_resource(court_status_now.GetCourtStatusNow, '/get_court_status_now')
-api.add_resource(task_comments.GetTaskComments, '/get_task_comments')
-api.add_resource(add_court.AddCourt, '/add_court')
+stkapi.add_resource(add_court_status.AddCourtStatus, '/add_court_status')
+stkapi.add_resource(court_status_now.GetCourtStatusNow, '/get_court_status_now')
+stkapi.add_resource(task_comments.GetTaskComments, '/get_task_comments')
+stkapi.add_resource(add_court.AddCourt, '/add_court')
 
 
-api.add_resource(get_court_status_list, '/get_court_status_list')
+stkapi.add_resource(get_court_status_list, '/get_court_status_list')
 
-api.add_resource(get_personen_info, '/get_personen_info')
+stkapi.add_resource(get_personen_info, '/get_personen_info')
 
-api.add_resource(upload_file.UploadFile, '/upload_file')
+stkapi.add_resource(upload_file.UploadFile, '/upload_file')
 
 if __name__ == '__main__':
     app.run(debug=True)

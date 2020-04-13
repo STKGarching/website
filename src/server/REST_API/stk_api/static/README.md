@@ -81,3 +81,7 @@ Beschriebung: Liefert personen info
 Beschriebung: Liefert kommentare eines Tickets
 
 `http://localhost:5000/get_task_comments?task_no=2`
+
+### 17. Upload file
+Beschreibung: Upload file. Siehe ein Request Bsp in stkapi/test/test_upload_file_over_api.py
+In config.yaml kann man PATH defeinieren, wo das File gespeichert wird.
