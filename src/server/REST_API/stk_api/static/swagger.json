@@ -77,7 +77,7 @@
             "name": "person_no",
             "required": true,
             "type": "integer",
-            "description": "",
+            "description": "Get infos on the user with specific person_no",
             "default": "json"
           }
         ],
@@ -341,7 +341,7 @@
           }
         }
       },
-      "court_status": {
+      "get_court_status": {
         "type": "object",
         "properties": {
           "court_status_name": {

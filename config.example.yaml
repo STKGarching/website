@@ -45,3 +45,9 @@ auth0:
 database:
   username: user
   password: password
+
+##################
+## File system   #
+##################
+path:
+  upload_file_path: /home/miro/workspace/  
