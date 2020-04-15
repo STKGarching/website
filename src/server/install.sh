@@ -8,7 +8,7 @@ then
   exit -1
 fi
 
-read -p "Enter mysql username: "  username
+#read -p "Enter mysql username: "  username
 
 if [ ${#file} -eq 1 ]
 then

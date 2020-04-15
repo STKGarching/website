@@ -171,7 +171,7 @@ var PARAMS_PER_TARGET = {
       headers: {
         "Access-Control-Allow-Origin": "*"
       },
-      historyApiFallback: true
+      //historyApiFallback: true
     }
   },
 

@@ -43,5 +43,7 @@ auth0:
 # Database      #
 #################
 database:
+  hostname: localhost
+  database: stkgarching
   username: user
   password: password
