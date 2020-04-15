@@ -178,13 +178,13 @@ var PARAMS_PER_TARGET = {
   BUILD: {
     entry: path.resolve(__dirname, "client/app/index.js"),
     output: {
-      path: path.join(__dirname, "/../build")
+      path: path.join(__dirname, env.buildPath)
     },
     devtool: "source-map",
     mode: "production",
     plugins: [new CleanWebpackPlugin(), new HtmlWebPackPlugin({
       hash: true,
-      filename: path.join(__dirname, "/../build/index.html")
+      filename: path.join(__dirname, env.buildPath, "/index.html")
     })
     ]
   }

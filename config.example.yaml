@@ -5,17 +5,20 @@ env:
     - {
           env: WFIF1,
           schema: { ddns: https://, local: http:// },
-          baseURL: { local: 1.1.113 }
+          baseURL: { local: 1.1.113 },
+          buildPath: /../../build,
       }
     - {
           env: WIFI2,
           schema: { ddns: https://, local: http:// },
-          baseURL: { ddns: mywebsite.ddns.net, local: 8.8.8.8 }
+          baseURL: { ddns: mywebsite.ddns.net, local: 8.8.8.8 },
+          buildPath: /../../build,
       }
     - {
           env: prod,
           schema: { prod: https://, stage: http:// },
-          baseURL: { prod: www.mywebsite.de, stage: www.mywebsite.de }
+          baseURL: { prod: www.mywebsite.de, stage: www.mywebsite.de },
+          buildPath: /../../build,
       }
       
 #################
