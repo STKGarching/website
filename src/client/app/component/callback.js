@@ -17,7 +17,7 @@ class Callback extends Component {
 
     return (
       <div style={style}>
-        <p>Loading...</p>
+        <p>Loading... Callback</p>
       </div>
     );
   }
