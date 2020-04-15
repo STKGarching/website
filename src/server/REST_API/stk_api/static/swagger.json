@@ -68,6 +68,75 @@
         }
       }
     },
+    "/task_details": {
+      "get": {
+        "summary":
+          "Bei der Auswahl eines Task können zu diesem Detail Informationen geladen werden.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "task_no",
+            "required": true,
+            "type": "integer",
+            "description": "Task nummer",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/task_details"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },    
+    "/benefit": {
+      "get": {
+        "summary": "Jedes eingeloggte Mitglied kann seine Benefits sehen.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "members_no",
+            "required": true,
+            "type": "integer",
+            "description": "Mitglied nummer",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "valid_from",
+            "required": true,
+            "type": "string",
+            "description": "gueltig ab",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "valid_to",
+            "required": true,
+            "type": "string",
+            "description": "gueltig bis",
+            "default": "json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/components/schemas/benefit"
+            }
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
     "/person_info": {
       "get": {
         "summary": "Get infos on the user with specific person_no",
@@ -77,7 +146,7 @@
             "name": "person_no",
             "required": true,
             "type": "integer",
-            "description": "",
+            "description": "Get infos on the user with specific person_no",
             "default": "json"
           }
         ],
@@ -202,75 +271,6 @@
         }
       }
     },
-    "/task_details": {
-      "get": {
-        "summary":
-          "Bei der Auswahl eines Task können zu diesem Detail Informationen geladen werden.",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "task_no",
-            "required": true,
-            "type": "integer",
-            "description": "Task nummer",
-            "default": "json"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success response",
-            "schema": {
-              "$ref": "#/components/schemas/task_details"
-            }
-          },
-          "404": {
-            "description": "Failed. Request not found."
-          }
-        }
-      }
-    },
-    "/benefit": {
-      "get": {
-        "summary": "Jedes eingeloggte Mitglied kann seine Benefits sehen.",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "members_no",
-            "required": true,
-            "type": "integer",
-            "description": "Mitglied nummer",
-            "default": "json"
-          },
-          {
-            "in": "query",
-            "name": "valid_from",
-            "required": true,
-            "type": "string",
-            "description": "gueltig ab",
-            "default": "json"
-          },
-          {
-            "in": "query",
-            "name": "valid_to",
-            "required": true,
-            "type": "string",
-            "description": "gueltig bis",
-            "default": "json"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success response",
-            "schema": {
-              "$ref": "#/components/schemas/benefit"
-            }
-          },
-          "404": {
-            "description": "Failed. Request not found."
-          }
-        }
-      }
-    },
     "/contribution": {
       "get": {
         "summary": "toDo",
@@ -282,6 +282,56 @@
             "description": "toDo",
             "default": "json"
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response"
+          },
+          "404": {
+            "description": "Failed. Request not found."
+          }
+        }
+      }
+    },
+    "/add_person": {
+      "put": {
+        "summary": "eine neue Person hinzufuegen",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "person_no",
+            "type": "integer",
+            "description": "Personen nummer",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "is_member",
+            "type": "boolean",
+            "description": "Ist Mitglied? true oder false",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "member_no",
+            "type": "integer",
+            "description": "Mitglied nummer",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "first_name",
+            "type": "string",
+            "description": "Vorname",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "name": "last_name",
+            "type": "string",
+            "description": "Nachname",
+            "default": "json"
+          },
         ],
         "responses": {
           "200": {
@@ -341,7 +391,7 @@
           }
         }
       },
-      "court_status": {
+      "get_court_status": {
         "type": "object",
         "properties": {
           "court_status_name": {
@@ -425,7 +475,37 @@
             "example": "Hallentraining Herren am Samstag"
           }
         }
-      }
+      },
+      "add_person": {
+        "type": "object",
+        "properties": {
+          "person_no": {
+            "type": "integer",
+            "format": "integer",
+            "example": 99
+          },
+          "is_member": {
+            "type": "boolean",
+            "format": "boolean",
+            "example": "true"
+          },
+          "member_no": {
+            "type": "integer",
+            "format": "integer",
+            "example": 99
+          },
+          "first_name": {
+            "type": "string",
+            "format": "string",
+            "example": "Max"
+          },          
+          "last_name": {
+            "type": "string",
+            "format": "string",
+            "example": "Mustermann"
+          }
+        }
+      }      
     }
   }
 }

@@ -150,7 +150,12 @@ The court status can be monitored. First application is the status due to weathe
 "Arbeitsdienst" should be organised by a task list (similar to JIRA)
 
 ## REST_API
-Find more infos at /src/server/REST_API/static/README.md
+Find more infos at /src/server/REST_API/stk_api/static/README.md
+
+For deps run this cmd in /src/server/REST_API
+```
+pip3 install -U . 
+```
 
 Start API in folder /src/server/REST_API/stk_api with  
 ```

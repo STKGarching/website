@@ -7,7 +7,6 @@ with open(os.path.dirname(__file__) + '/../../../../../config.yaml') as file:
 
 connection = psycopg2.connect(host="localhost",database="stkgarching", user=credentials["database"]["username"], password=credentials["database"]["password"])
 def fetch_data_in_database(sql):
-    #connection = mysql.connect()
     cursor = connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()
